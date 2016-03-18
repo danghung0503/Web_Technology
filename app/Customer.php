@@ -7,4 +7,8 @@ class Customer extends Model {
 	$table = 'customers';
 	$fillable = ['id','fullname','email','phonenumber','address','gender'];
 	public $timestamps = false;
+
+	public function order(){
+		return $this->hasOne('App\Order');
+	}
 }

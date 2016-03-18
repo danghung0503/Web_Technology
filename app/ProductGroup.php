@@ -4,7 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductGroup extends Model {
 	protected $table = 'product_groups';
-	protected $fillable = ['name'];
+	protected $fillable = ['id','name'];
 
 	public $timestamps = false;
+
+	public function brand(){
+		return $this->hasMany('App\brand');
+	}
 }

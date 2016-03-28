@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration {
 			$table->string('avatar');
 			$table->integer('level');
 			$table->tinyInteger('actived');
+			$table->string('verification_code');
 			$table->rememberToken();
 		});
 	}

@@ -3,18 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Admin Manager</title>
-	<link rel="stylesheet" href="css/admin.css">
-	<script type = "text/javascript" src = "js/jquery.min.js"></script>
-	<script type = "text/javascript" src = "js/admin.js"></script>
+	<link rel="stylesheet" href="{!! url('public/css/admin.css') !!}">
+	<script type = "text/javascript" src = "{!! url('public/js/jquery.min.js') !!}"></script>
+	<script type = "text/javascript" src = "{!! url('public/js/admin.js') !!}"></script>
 </head>
 <body>
 	<div id="header">
 		<div class="logo">
-			<a href="#"><img src="images/logo.png" alt="Thế giới công nghệ" title = "TheGioiCongNghe.com"></a>
+			<a href="#"><img src="{!!url('resources/views/images/system/logo.png') !!}" alt="Thế giới công nghệ" title = "TheGioiCongNghe.com"></a>
 		</div>
 		<div class="info_manage">
 			<a href="#"><span>Admin</span>
-				<img src="images/ad_manage.png" alt="">
+				<img src="{!! url('resources/views/images/system/ad_manage.png') !!}" alt="">
 			</a>
 			<ul>
 				<li><a href="#">Cập nhật</a></li>
@@ -25,7 +25,7 @@
 	<div id="content">
 		<div id="nav">
 			<div class="info_admin">
-				<img src="images/img_admin.png" alt="" height="45px" width="45px">
+				<img src="{!! url('resources/views/images/system/img_admin.png') !!}" alt="" height="45px" width="45px">
 				<span>Admin</span>
 			</div>
 			<div class="search_box">
@@ -37,47 +37,47 @@
 				<ul>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!! url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Quản lý tin tức</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!! url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 						
 					</li>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Thành viên</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 					</li>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Quản lý sản phẩm</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 						<ul>
 							<li>
 								<a href="#">
-									<img src="images/i_news.png" alt="" class="i_first">
+									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 									<span>Laptop</span>
 								</a>
 							</li>
 							<li>
 								<a href="">
-									<img src="images/i_news.png" alt="" class="i_first">
+									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 									<span>Điện thoại</span>
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="images/i_news.png" alt="" class="i_first">
+									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 									<span>Phụ kiện</span>
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="images/i_news.png" alt="" class="i_first">
+									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 									<span>Máy tính bảng</span>
 								</a>
 							</li>
@@ -85,23 +85,23 @@
 					</li>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Quản lý đơn hàng</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 					</li>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Quản lý quảng cáo</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 					</li>
 					<li>
 						<a href="#">
-							<img src="images/i_news.png" alt="" class="i_first">
+							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
 							<span>Thống kê</span>
-							<img src="images/i_open_item.png" alt="" class="i_last">
+							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
 						</a>
 					</li>
 				</ul>

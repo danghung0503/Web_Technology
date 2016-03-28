@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers;
-
+use Auth;
 class HomeController extends Controller {
 
 	/*
@@ -20,7 +20,13 @@ class HomeController extends Controller {
 	 */
 	public function __construct()
 	{
+		//Gọi đến midleware chứng thực
 		$this->middleware('auth');
+		$this->beforeFilter(function(){
+			if(Auth::user()->level == 1){
+				return redirect('member/index');
+			}
+		});
 	}
 
 	/**
@@ -30,7 +36,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		return view('admin.index');
 	}
 
 }

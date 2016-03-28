@@ -4,6 +4,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 
+//middleware của thằng guest
 class RedirectIfAuthenticated {
 
 	/**
@@ -33,11 +34,19 @@ class RedirectIfAuthenticated {
 	 */
 	public function handle($request, Closure $next)
 	{
+		//Nếu đã tồn tại session
 		if ($this->auth->check())
 		{
-			return new RedirectResponse(url('/home'));
+			if($this->auth->user()->level==2){
+				return new RedirectResponse(url('admin'));
+			}else if($this->auth->user()->level==1){
+				echo $this->auth->user()->activated;
+				if($this->auth->user()->activated == 0){
+		//			return new RedirectResponse(url('/'));
+				}
+		//		return new RedirectResponse(url('member/index'));
+			}
 		}
-
 		return $next($request);
 	}
 

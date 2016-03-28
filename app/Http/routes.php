@@ -12,13 +12,19 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
+Route::get('admin', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-Route::get('demo',function(){
-	return url('/demo');
+Route::group(['prefix'=>'auth'],function(){
+	Route::get('login',['as'=>'auth.getLogin','uses'=>'Auth\AuthController@getLogin']);
+	Route::post('login',['as'=>'auth.postLogin','uses'=>'Auth\AuthController@postLogin']);
+	Route::get('register',['as'=>'auth.getRegister','uses'=>'Auth\AuthController@getRegister']);
+	Route::post('register',['as'=>'auth.postRegister','uses'=>'Auth\AuthController@postRegister']);
+	Route::get('verify/{code}',['as'=>'auth.getVerify','use'=>'Auth\AuthController@getVerify']);
+});
+Route::group(['prefix'=>'member'],function(){
+	Route::get('index',['as'=>'member.index','uses'=>'UserController@index']);
 });

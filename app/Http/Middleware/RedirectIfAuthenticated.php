@@ -40,11 +40,7 @@ class RedirectIfAuthenticated {
 			if($this->auth->user()->level==2){
 				return new RedirectResponse(url('admin'));
 			}else if($this->auth->user()->level==1){
-				echo $this->auth->user()->activated;
-				if($this->auth->user()->activated == 0){
-		//			return new RedirectResponse(url('/'));
-				}
-		//		return new RedirectResponse(url('member/index'));
+				return new RedirectResponse(url('member/index'));
 			}
 		}
 		return $next($request);

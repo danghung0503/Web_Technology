@@ -27,4 +27,6 @@ Route::group(['prefix'=>'auth'],function(){
 });
 Route::group(['prefix'=>'member'],function(){
 	Route::get('index',['as'=>'member.index','uses'=>'UserController@index']);
+	Route::get('update',['as'=>'member.update','uses'=>'UserController@getUpdate']);
+	Route::post('update/{id}',['as'=>'member.update','uses'=>'UserController@postUpdate']);
 });

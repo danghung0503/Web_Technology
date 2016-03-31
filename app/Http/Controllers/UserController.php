@@ -9,8 +9,10 @@ class UserController extends Controller {
 	public function __construct(){
 		$this->middleware('auth');
 		$this->beforefilter(function(){
-			if(Auth::user()->actived==0){
-				return redirect('/');
+			if(Auth::check()){
+				if(Auth::user()->actived==0){
+					return redirect('/');
+				}
 			}
 		});
 	}

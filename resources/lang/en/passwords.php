@@ -13,10 +13,10 @@ return [
 	|
 	*/
 
-	"password" => "Passwords must be at least six characters and match the confirmation.",
-	"user" => "We can't find a user with that e-mail address.",
-	"token" => "This password reset token is invalid.",
-	"sent" => "We have e-mailed your password reset link!",
-	"reset" => "Your password has been reset!",
+	"password" => "Mật khẩu phải chứa ít nhất sáu ký tự và trùng với mật khẩu xác nhận",
+	"user" => "Chúng tôi không thể xác định được thành viên nào với địa chỉ email như vậy",
+	"token" => "Mã để đặt lại mật khẩu của bạn không có hiệu lực!",
+	"sent" => "Chúng tôi đã gửi email đến liên kết đặt lại mật khẩu của bạn!",
+	"reset" => "Mật khẩu của bạn đã được đặt lại!",
 
 ];

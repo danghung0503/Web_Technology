@@ -11,6 +11,7 @@ use Hash;
 use Input;
 use Auth;
 use Mail;
+use DB;
 class AuthController extends Controller {
 
 	/*
@@ -49,6 +50,10 @@ class AuthController extends Controller {
 		//Từ khóa except chỉ định action không bị ảnh hưởng=>getLogout sẽ không bị ảnh hưởng bởi middleware
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
+	protected function getFailedLoginMessage()
+	{
+		return 'Email hoặc mật khẩu không đúng.';
+	}
 	public function getRegister(){
 		return view('auth.register');
 	}
@@ -72,10 +77,17 @@ class AuthController extends Controller {
 			$id = $user->id;
 			$p_folder = 'resources/views/images/upload/member/'.$id;
 			mkdir($p_folder);
+			echo $avatar_name."\n";
 			$request->file('avatar')->move($p_folder,$avatar_name);
+			echo $avatar_name;
 			$user->avatar = $avatar_name;
 			$user->save();
 		}
+		//Lưu dữ liệu vào bảng password_resets
+		DB::table('password_resets')->insert([
+				'email'=> $request->email,
+				'token'=>str_random(30)
+			]);
 		//Gửi email xác thực đến khách hàng
 		$data = array(
 			'name'=>$user->username,
@@ -90,7 +102,7 @@ class AuthController extends Controller {
 		Mail::send('emails.welcome',$data, function($message) use ($data){
 			//Địa chỉ gửi
 			$message->from('danghung3136@gmail.com','Thế Giới Công Nghệ');
-			$message->subject('Welcome to site name');
+			$message->subject('Chào mừng bạn đến với Website của chúng tôi!');
 			//Địa chỉ nhận
 			$message->to($data['email']);
 		});

@@ -2,31 +2,47 @@
 <html lang="vi">
 <head>
 	<meta charset="UTF-8">
-	<title>Admin Manager</title>
-	<link rel="stylesheet" href="{!! url('public/css/admin.css') !!}">
-	<script type = "text/javascript" src = "{!! url('public/js/jquery.min.js') !!}"></script>
-	<script type = "text/javascript" src = "{!! url('public/js/admin.js') !!}"></script>
+	<title>Trang quản trị</title>
+
+	<link rel="stylesheet" href="{!!url('public/css/bootstrap.min.css')!!}">
+	<link rel="stylesheet" href="{!!url('public/css/admin.css')!!}">
+	{{-- Thêm vào các css --}}
+	@yield('css')
+	
+	<script type = "text/javascript" src = "{!!url('public/js/jquery.min.js')!!}"></script>
+	<script type = "text/javascript" src = "{!!url('public/js/bootstrap.min.js')!!}"></script>
+	 
+
+	 {{-- Sử dụng jquery và bootstrap có sẵn trong laravel --}}
+	 <!-- 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ -->
+	<script type = "text/javascript" src = "{!!url('public/js/admin.js')!!}"></script>
+	{{-- Script cho việc flash message --}}
+	<script type = "text/javascript" src = "{!!url('public/js/my_script.js')!!}"></script>
 </head>
 <body>
 	<div id="header">
 		<div class="logo">
-			<a href="#"><img src="{!!url('resources/views/images/system/logo.png') !!}" alt="Thế giới công nghệ" title = "TheGioiCongNghe.com"></a>
+			<a href="#"><img src="{!!url('public/images/logo.png')!!}" alt="Thế Giới Công Nghệ" title = "Thế Giới Công Nghệ"></a>
 		</div>
 		<div class="info_manage">
-			<a href="#"><span>Admin</span>
-				<img src="{!! url('resources/views/images/system/ad_manage.png') !!}" alt="">
+			<a><span>Admin</span>
+				<img width='30px' height='30px' src="{!!url('resources/upload/avatar/'.(!empty(Auth::user()->avatar)?Auth::user()->id.'/'.Auth::user()->avatar:'default/default.jpg'))!!}" alt="">
 			</a>
 			<ul>
-				<li><a href="#">Cập nhật</a></li>
-				<li><a href="#">Đăng xuất</a></li>
+				<li><a href="{!!url('admin/member/update')!!}/{!!Auth::user()->id!!}">Cập nhật</a></li>
+				<li><a href="{!!url('/auth/logout')!!}">Đăng xuất</a></li>
 			</ul>
 		</div>
 	</div> <!-- End of Header -->
+
 	<div id="content">
 		<div id="nav">
 			<div class="info_admin">
-				<img src="{!! url('resources/views/images/system/img_admin.png') !!}" alt="" height="45px" width="45px">
-				<span>Admin</span>
+				<img src="{!!url('resources/upload/avatar/'.(!empty(Auth::user()->avatar)?Auth::user()->id.'/'.Auth::user()->avatar:'default/default.jpg'))!!}" alt="" height="45px" width="45px">
+				<span>Admin<br/>{{Auth::user()->fullname}}</span>
 			</div>
 			<div class="search_box">
 				<form action="" method ="POST" >
@@ -36,89 +52,157 @@
 			<div class="main_nav">
 				<ul>
 					<li>
-						<a href="#">
-							<img src="{!! url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Quản lý tin tức</span>
-							<img src="{!! url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
-						</a>
-						
-					</li>
-					<li>
-						<a href="#">
-							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Thành viên</span>
-							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Quản lý sản phẩm</span>
-							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
+						<a>
+							{{-- <span class="glyphicon glyphicon-home"></span> --}}
+							<span class="glyphicon glyphicon-wrench"></span>
+							Quản lý hệ thống
+							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
 						</a>
 						<ul>
 							<li>
 								<a href="#">
-									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-									<span>Laptop</span>
+									<span class="glyphicon glyphicon-resize-full"></span>
+									Banner lớn
 								</a>
 							</li>
 							<li>
 								<a href="">
-									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-									<span>Điện thoại</span>
+									<span class="glyphicon glyphicon-resize-small"></span>
+									Banner nhỏ
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-folder-open"></span>
+									Menu
+								</a>
+							</li>
+							
+						</ul>
+					</li>
+					<li>
+						<a>
+							<span class="glyphicon glyphicon-globe"></span>
+							Quản lý tin tức
+							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+						</a>
+						<ul>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-inbox"></span>
+									Công nghệ
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-ok"></span>
+									Khuyến mãi
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-earphone"></span>
+									Liên hệ
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="{!!route('admin.member.getList')!!}">
+							<span class="glyphicon glyphicon-user"></span>
+							Thành viên
+						</a>
+					</li>
+					<li>
+						<a href="{!!route('admin.brand.getList')!!}">
+							<span class="glyphicon glyphicon-list-alt"></span>
+							Hãng sản xuất
+						</a>
+					</li>
+					<li>
+						<a>
+							<span class="glyphicon glyphicon-qrcode"></span>
+							Quản lý sản phẩm
+							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+						</a>
+						<ul>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-earphone"></span>
+									Điện thoại
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-thumbs-up"></span>
+									Điện thoại mới
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-usd"></span>
+									Điện thoại bán chạy
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-									<span>Phụ kiện</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-									<span>Máy tính bảng</span>
+									<span class="glyphicon glyphicon-hdd"></span>
+									Phụ kiện
 								</a>
 							</li>
 						</ul>
 					</li>
 					<li>
 						<a href="#">
-							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Quản lý đơn hàng</span>
-							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
+							<span class="glyphicon glyphicon-file"></span>
+							Quản lý đơn hàng
 						</a>
 					</li>
 					<li>
 						<a href="#">
-							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Quản lý quảng cáo</span>
-							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
+							<span class="glyphicon glyphicon-picture"></span>
+							Quản lý quảng cáo
 						</a>
 					</li>
 					<li>
-						<a href="#">
-							<img src="{!!url('resources/views/images/system/i_news.png') !!}" alt="" class="i_first">
-							<span>Thống kê</span>
-							<img src="{!!url('resources/views/images/system/i_open_item.png') !!}" alt="" class="i_last">
+						<a>
+							<span class="glyphicon glyphicon-stats"></span>
+							Thống kê
+							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
 						</a>
+						<ul>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-dashboard"></span>
+									Theo tuần
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-dashboard"></span>
+									Theo tháng
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="glyphicon glyphicon-dashboard"></span>
+									Theo năm
+								</a>
+							</li>
+							
+						</ul>
 					</li>
 				</ul>
 			</div>
 		</div> <!-- End of Navbar -->
 		<div id="main">
-			The Big Bang theory is the prevailing cosmological model for the universe from the earliest known periods through its subsequent large-scale evolution.[1][2][3] The model accounts for the fact that the universe expanded from a very high density and high temperature state,[4][5] and offers a comprehensive explanation for a broad range of phenomena, including the abundance of light elements, the cosmic microwave background, large scale structure and Hubble's Law.[6] If the known laws of physics are extrapolated beyond where they have been verified, there is a singularity. Some estimates place this moment at approximately 13.8 billion years ago, which is thus considered the age of the universe.[7] After the initial expansion, the universe cooled sufficiently to allow the formation of subatomic particles, and later simple atoms. Giant clouds of these primordial elements later coalesced through gravity to form stars and galaxies.
+			{{-- Thêm nội dung vào --}}
 
-Since Georges Lemaître first noted, in 1927, that an expanding universe might be traced back in time to an originating single point, scientists have built on his idea of cosmic expansion. While the scientific community was once divided between supporters of two different expanding universe theories, the Big Bang and the Steady State theory, accumulated empirical evidence provides strong support for the former.[8] In 1929, from analysis of galactic redshifts, Edwin Hubble concluded that galaxies are drifting apart; this is important observational evidence consistent with the hypothesis of an expanding universe. In 1965, the cosmic microwave background radiation was discovered, which was crucial evidence in favor of the Big Bang model, since that theory predicted the existence of background radiation throughout the universe before it was discovered. More recently, measurements of the redshifts of supernovae indicate that the expansion of the universe is accelerating, an observation attributed to dark energy's existence.[9] The known physical laws of nature can be used to calculate the characteristics of the universe in detail back in time to an initial state of extreme density and temperature.[10][11][12]The Big Bang theory is the prevailing cosmological model for the universe from the earliest known periods through its subsequent large-scale evolution.[1][2][3] The model accounts for the fact that the universe expanded from a very high density and high temperature state,[4][5] and offers a comprehensive explanation for a broad range of phenomena, including the abundance of light elements, the cosmic microwave background, large scale structure and Hubble's Law.[6] If the known laws of physics are extrapolated beyond where they have been verified, there is a singularity. Some estimates place this moment at approximately 13.8 billion years ago, which is thus considered the age of the universe.[7] After the initial expansion, the universe cooled sufficiently to allow the formation of subatomic particles, and later simple atoms. Giant clouds of these primordial elements later coalesced through gravity to form stars and galaxies.
-
-Since Georges Lemaître first noted, in 1927, that an expanding universe might be traced back in time to an originating single point, scientists have built on his idea of cosmic expansion. While the scientific community was once divided between supporters of two different expanding universe theories, the Big Bang and the Steady State theory, accumulated empirical evidence provides strong support for the former.[8] In 1929, from analysis of galactic redshifts, Edwin Hubble concluded that galaxies are drifting apart; this is important observational evidence consistent with the hypothesis of an expanding universe. In 1965, the cosmic microwave background radiation was discovered, which was crucial evidence in favor of the Big Bang model, since that theory predicted the existence of background radiation throughout the universe before it was discovered. More recently, measurements of the redshifts of supernovae indicate that the expansion of the universe is accelerating, an observation attributed to dark energy's existence.[9] The known physical laws of nature can be used to calculate the characteristics of the universe in detail back in time to an initial state of extreme density and temperature.[10][11][12]The Big Bang theory is the prevailing cosmological model for the universe from the earliest known periods through its subsequent large-scale evolution.[1][2][3] The model accounts for the fact that the universe expanded from a very high density and high temperature state,[4][5] and offers a comprehensive explanation for a broad range of phenomena, including the abundance of light elements, the cosmic microwave background, large scale structure and Hubble's Law.[6] If the known laws of physics are extrapolated beyond where they have been verified, there is a singularity. Some estimates place this moment at approximately 13.8 billion years ago, which is thus considered the age of the universe.[7] After the initial expansion, the universe cooled sufficiently to allow the formation of subatomic particles, and later simple atoms. Giant clouds of these primordial elements later coalesced through gravity to form stars and galaxies.
-
-Since Georges Lemaître first noted, in 1927, that an expanding universe might be traced back in time to an originating single point, scientists have built on his idea of cosmic expansion. While the scientific community was once divided between supporters of two different expanding universe theories, the Big Bang and the Steady State theory, accumulated empirical evidence provides strong support for the former.[8] In 1929, from analysis of galactic redshifts, Edwin Hubble concluded that galaxies are drifting apart; this is important observational evidence consistent with the hypothesis of an expanding universe. In 1965, the cosmic microwave background radiation was discovered, which was crucial evidence in favor of the Big Bang model, since that theory predicted the existence of background radiation throughout the universe before it was discovered. More recently, measurements of the redshifts of supernovae indicate that the expansion of the universe is accelerating, an observation attributed to dark energy's existence.[9] The known physical laws of nature can be used to calculate the characteristics of the universe in detail back in time to an initial state of extreme density and temperature.[10][11][12]
+			@yield('content')
 		</div> <!-- End of Main -->
 	</div> <!-- End of Contend -->
 	<div id="footer">
-		<p>Bản quyền &copy 2016 thuộc về nhóm </p>
+		<p>Bản quyền &copy 2016 thuộc về nhóm TTT </p>
 	</div> <!-- End of Footer -->
 </body>
 </html>

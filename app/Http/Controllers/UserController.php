@@ -13,17 +13,17 @@ class UserController extends Controller {
 		$this->middleware('auth');
 		$this->beforefilter(function(){
 			if(Auth::check()){
-				if(Auth::user()->actived==0){
-					return redirect('/');
+				if(Auth::user()->level==2){
+					return redirect('admin');
 				}
 			}
 		});
 	}
 	public function index(){
-		return view('user.index');
+		return view('users.index');
 	}
 	public function getUpdate(){
-		return view('user.update');
+		return view('users.members.update');
 	}
 	public function postUpdate(UserUpdateRequest $request){
 		$user = User::find(Auth::user()->id);
@@ -49,6 +49,6 @@ class UserController extends Controller {
 		}
 		$user->save();
 		Auth::attempt(['username'=>$user->username,'password'=>$user->password]);
-		return redirect('member/index');
+		return redirect('user/member/index');
 	}
 }

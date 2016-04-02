@@ -23,9 +23,11 @@ class HomeController extends Controller {
 		//Gọi đến midleware chứng thực
 		$this->middleware('auth');
 		$this->beforeFilter(function(){
+			if(Auth::check()){
 			if(Auth::user()->level == 1){
-				return redirect('member/index');
+				return redirect('users/members/index');
 			}
+		}
 		});
 	}
 

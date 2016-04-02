@@ -35,4 +35,34 @@ class PasswordController extends Controller {
 		$this->middleware('guest');
 	}
 
+	public function getEmail()
+	{
+		return view('auth.password');
+	}
+
+	// public function postEmail(Request $request)
+	// {
+	// 	$this->validate($request, ['email' => 'required|email']);
+	// 	$response = $this->passwords->sendResetLink($request->only('email'), function($n)
+	// 	{
+	// 		$n->from('danghung3136@gmail.com',"Thế Giới Công Nghệ");
+	// 		$n->subject($this->getEmailSubject());
+	// 	});
+
+	// 	switch ($response)
+	// 	{
+	// 		case PasswordBroker::RESET_LINK_SENT:
+	// 			return redirect()->back()->with('status', trans($response));
+
+	// 		case PasswordBroker::INVALID_USER:
+	// 			return redirect()->back()->withErrors(['email' => trans($response)]);
+	// 	}
+	// }
+
+	protected function getEmailSubject()
+	{
+		return isset($this->subject) ? $this->subject : 'Chọn lại mật khẩu';
+	}
+
+	
 }

@@ -19,7 +19,7 @@ body {}
 #navbar{
 	margin: 60px auto 10px;
 	height: 53px;
-	background:url('../../resources/views/images/system/background_nav.png');
+	background:url('../images/background_nav.png');
 	/*display:block;*/
 	width:100%;
 }
@@ -91,7 +91,7 @@ li{
 	border-radius:5px;
 }
 #navbar ul li ul li a{
-	    padding: 10px 104px 10px 15px;
+	    padding: 10px 80px 10px 15px;
 }
 #navbar>ul>li:hover>ul{
 	display:block;
@@ -145,6 +145,6 @@ li{
 #footer .img_cup{float: left;margin:0px 15px;}
 #footer .content_cup{margin-top: 10px;text-transform: uppercase;color: #666;font-size: 14px;text-align:left;}
 /* Main Footer */
-#footer .main_footer{height: 85px;background: url('../images/background_footer.png');display: inline-block;width: 100%;margin: 35px 0px 20px;color:white;text-align: center;}
+#footer .main_footer{height: 85px;background: url('../images/background_footer.png');/*display: inline-block*/clear:both;width: 100%;margin: 35px 0px 20px;color:white;text-align: center;}
 #footer .main_footer a{vertical-align: middle;display:inline-block;color: white;text-transform: uppercase;font-weight: bold;padding: 17px 10px;font-size: 14px;text-decoration: none;}
 #footer .main_footer p{margin: 9px 0px;}

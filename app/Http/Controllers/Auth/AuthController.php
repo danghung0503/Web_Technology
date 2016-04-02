@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserLoginRequest;
 use App\User;
 use Hash;
@@ -48,8 +49,38 @@ class AuthController extends Controller {
 		//Mỗi khi gọi đến thì sẽ tạo thành đối tượng mới, mỗi khi gọi sẽ 
 		//lại gọi đến phương thức khởi tạo một lần
 		//Từ khóa except chỉ định action không bị ảnh hưởng=>getLogout sẽ không bị ảnh hưởng bởi middleware
-		$this->middleware('guest', ['except' => 'getLogout']);
+		
+		$this->middleware('guest', ['except' => array('getLogout','getDelete','getList')]);
 	}
+
+	public function postLogin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required|email', 'password' => 'required',
+		],[
+			'email.required'=>"Bạn chưa nhập email",
+			'email.email'=>'Email không hợp lệ',
+			'password.required'=>'Bạn chưa nhập password'
+		]);
+		//Lấy về một mảng trong đó gồm hai key là email và password
+		$credentials = $request->only('email', 'password');
+		$credentials['actived'] = 1;
+		//Trường hợp đăng nhập thành công
+												//Nếu tích vào ô nhớ thì sẽ trả về 1
+												// và thực hiện lưu thông tin đăng nhập
+		if ($this->auth->attempt($credentials, $request->has('remember')))
+		{
+				return redirect()->intended($this->redirectPath());
+		}
+		//trường hợp thông tin đăng nhập không đúng
+		//Chuyển đến trang login cùng với các tham số
+		return redirect($this->loginPath())
+					->withInput($request->only('email', 'remember'))
+					->withErrors([
+						'email' => $this->getFailedLoginMessage(),	//Trả về thông báo lỗi của email
+					]);
+	}
+
 	protected function getFailedLoginMessage()
 	{
 		return 'Email hoặc mật khẩu không đúng.';
@@ -69,46 +100,51 @@ class AuthController extends Controller {
 		$user->company 			= $request->company;
 		$user->level 			= 1;
 		$user->actived 			= 0;
-		$user->verification_code = str_random(30);
+		$user->verification_code = str_random(32);
 		$user->remember_token   = $request->_token;
-		$user->save();
-		if(input::hasFile('avatar')){	//Nếu tồn tại file
-			$avatar_name = $request->file('avatar')->getClientOriginalName();
-			$id = $user->id;
-			$p_folder = 'resources/views/images/upload/member/'.$id;
-			mkdir($p_folder);
-			echo $avatar_name."\n";
-			$request->file('avatar')->move($p_folder,$avatar_name);
-			echo $avatar_name;
-			$user->avatar = $avatar_name;
-			$user->save();
-		}
-		//Lưu dữ liệu vào bảng password_resets
-		DB::table('password_resets')->insert([
-				'email'=> $request->email,
-				'token'=>str_random(30)
-			]);
+
+
 		//Gửi email xác thực đến khách hàng
 		$data = array(
 			'name'=>$user->username,
 			'email' =>$user->email,
 			'verification_code'=>$user->verification_code
 		);
-		//Gửi email đến người dùng đăng ký để xác nhận
+
+				//Gửi email đến người dùng đăng ký để xác nhận
 		
 					  //1. Tên của view sẽ chứa thômh điệp email
 					  //2. Mảng dữl iệu muốn truy nhập đến view
 					  //3. Cái nhận một sự thực hiện thông điệp
-		Mail::send('emails.welcome',$data, function($message) use ($data){
-			//Địa chỉ gửi
-			$message->from('danghung3136@gmail.com','Thế Giới Công Nghệ');
-			$message->subject('Chào mừng bạn đến với Website của chúng tôi!');
-			//Địa chỉ nhận
-			$message->to($data['email']);
-		});
+		// Mail::send('emails.welcome',$data, function($message) use ($data){
+		// 	//Địa chỉ gửi
+		// 	$message->from('danghung3136@gmail.com','dienthoai123456.org');
+		// 	$message->subject('Chào mừng bạn đến với Website của chúng tôi!');
+		// 	//Địa chỉ nhận
+		// 	$message->to($data['email']);
+		// });
+
+		$user->save();
+		$id = $user->id;
+		$p_folder = 'resources/upload/avatar/'.$id;
+		mkdir($p_folder);
+		if(input::hasFile('avatar')){	//Nếu tồn tại file
+			$avatar_name = $request->file('avatar')->getClientOriginalName();
+			$request->file('avatar')->move($p_folder,$avatar_name);
+			$user->avatar = $avatar_name;
+			$user->save();
+		}
+		//Lưu dữ liệu vào bảng password_resets
+		DB::table('password_resets')->insert([
+				'email'=> $request->email,
+				'token'=>str_random(32)
+			]);
+
 		//Chuyển đến trang login
 		return redirect('/');
 	}
+
+	//authentication user
 	public function getVerify($code){
 		//so sánh với dữ liệu đã lưu phía database
 		$data = User::where('verification_code','=',"$code")->get();
@@ -120,5 +156,27 @@ class AuthController extends Controller {
 		//Xác nhận xong sẽ tự động đăng nhập vào tài khoản
 		return redirect('auth/login')->with(['email'=>$data[0]['username']]);
 		}
+	}
+
+	public function getList(){
+		$users = User::where(['level'=>1,'actived'=>'1'])->get();
+		return view('admin.member.list')->with(['users'=>$users]);
+	}
+
+	public function getDelete($id){
+		//Xóa dữ liệu ảnh
+		$user = User::find($id);
+		if(!empty($user->avatar)){
+			$p_folder = 'resources/upload/avatar/'.$id.'/';
+			if(file_exists($p_folder.$user->avatar)){
+				unlink($p_folder.$user->avatar);
+			}
+			if(is_dir($p_folder)){
+				rmdir($p_folder);
+			}
+		}
+		DB::table('password_resets')->where('email',$user->email)->delete();
+		$user->delete();
+		return redirect('admin');
 	}
 }

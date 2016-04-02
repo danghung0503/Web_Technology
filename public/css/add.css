@@ -1,0 +1,48 @@
+form#addForm{
+	width: 60%;
+	margin: 0px auto;
+	    border: 1px solid grey;
+}
+#addForm table {
+	width: 100%;
+}
+#addForm th, td {
+	padding: 5px;
+	text-align: left;
+	height: 30px;
+}
+#addForm table th {
+	text-align: center;
+	background: #4C4C4C;
+	color: white;
+	font-size: 16px;
+	font-width: bold;
+}
+#addForm table tr td{
+	margin-right: 20px;
+}
+#addForm table tr td:first-child{
+	text-align:right;
+}
+#addForm span{
+	margin-top:-5px;
+}
+#addForm input{
+	height:25px;
+}
+#addForm .button{
+	height: 30px;
+    padding: 5px;
+    background: #1F921F;
+    color: white;
+    border: 1px solid grey;
+}
+#addForm input{
+	color: #545454;
+	padding-left:5px;
+}
+#addForm .message {
+	width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+}

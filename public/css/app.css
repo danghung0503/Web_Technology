@@ -6231,3 +6231,21 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+
+
+/*Phần thêm để chỉnh sửa màu sắc của phần header trong đăng nhập đăng xuất*/
+.navbar-default .navbar-collapse, .navbar-default {
+  background:#4C4C4C;
+  color: white;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:visited, .navbar-default .navbar-nav > li> a:visited , .navbar-default .navbar-nav > li > a{
+  color:white;
+}
+.navbar-default .navbar-nav > li:hover > a{
+  color:#BBBBBB;
+}
+
+.panel-default > .panel-heading {
+  background: #4C4C4C;
+  color: white;
+}

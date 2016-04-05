@@ -23,7 +23,7 @@ class UserUpdateRequest extends Request {
 	{
 		return [
 			'username'=>'required|max:255',
-			'password'=>'required||confirmed|min:6',
+			'password'=>'confirmed|min:6',
 			'gender'=>'required',
 			'fullname'=>'required|max:255',
 			'phonenumber'=>'required|numeric|min:10',
@@ -35,7 +35,6 @@ class UserUpdateRequest extends Request {
 		return[
 			'username.required'=>"Vui lòng nhập tên đăng nhập của bạn",
 			'username.unique'=>'Người dùng đã tồn tại',
-			'password.required'=>'Vui lòng nhập mật khẩu',
 			'password.min'	=>'Mật khẩu phải chứa ít nhất 6 ký tự',
 			'password.confirmed'=>'Xác nhận mật khẩu không chính xác',
 			'gender.required'=>'Vui lòng chọn giới tính của bạn',

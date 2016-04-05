@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Auth;
+use App\User;
 class HomeController extends Controller {
 
 	/*
@@ -41,4 +42,40 @@ class HomeController extends Controller {
 		return view('admin.index');
 	}
 
+
+	public function getList(){
+		//$users = User::where(['level'=>1,'actived'=>'1'])->get();
+		$users = User::all();
+		return view('admin.member.list')->with(['users'=>$users]);
+	}
+
+
+	public function getDelete($id){
+		//Xóa dữ liệu ảnh
+		$user = User::find($id);
+		if(!empty($user->avatar)){
+			$p_folder = 'resources/upload/avatar/'.$id.'/';
+			if(file_exists($p_folder.$user->avatar)){
+				unlink($p_folder.$user->avatar);
+			}
+			if(is_dir($p_folder)){
+				rmdir($p_folder);
+			}
+		}
+		DB::table('password_resets')->where('email',$user->email)->delete();
+		$user->delete();
+		return redirect('admin');
+	}
+
+	public function getUpdate($id){
+		$user = User::find($id);
+		return view('admin.member.update')->with(['user'=>$user]);
+	}
+
+	public function postUpdate(){
+		$user = User::find($_POST['id']);
+		$user->level = $_POST['level'];
+		$user->save();
+		return redirect('admin');
+	}
 }

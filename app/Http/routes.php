@@ -30,8 +30,10 @@ Route::group(['prefix'=>'auth'],function(){
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 	//Quản lý thành viên
 	Route::group(['prefix'=>'member'],function(){
-		Route::get('list',['as'=>'admin.member.getList','uses'=>'Auth\AuthController@getList']);
-		Route::get('delete/{id}',['as'=>'admin.member.getDelete','uses'=>'Auth\AuthController@getDelete']);
+		Route::get('list',['as'=>'admin.member.getList','uses'=>'HomeController@getList']);
+		Route::get('update/{id}',['as'=>'admin.member.getUpdate','uses'=>'HomeController@getUpdate']);
+		Route::post('update',['as'=>'admin.member.postUpdate','uses'=>'HomeController@postUpdate']);				
+		//Route::get('delete/{id}',['as'=>'admin.member.getDelete','uses'=>'Auth\AuthController@getDelete']);
 		});
 	//Quản lý nhóm sản phẩm
 	Route::group(['prefix'=>'productgroup'],function(){

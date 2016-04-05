@@ -11,15 +11,13 @@ use Hash;
 class UserController extends Controller {
 	public function __construct(){
 		$this->middleware('auth');
-		$this->beforefilter(function(){
-			if(Auth::check()){
+	}
+	public function index(){
+		if(Auth::check()){
 				if(Auth::user()->level==2){
 					return redirect('admin');
 				}
 			}
-		});
-	}
-	public function index(){
 		return view('users.index');
 	}
 	public function getUpdate(){
@@ -28,7 +26,8 @@ class UserController extends Controller {
 	public function postUpdate(UserUpdateRequest $request){
 		$user = User::find(Auth::user()->id);
 		$user->username 		= $request->username;
-		$user->password 		= Hash::make($request->password);
+		if(!empty($request->password))
+			$user->password 		= Hash::make($request->password);
 		$user->gender 			= $request->gender;
 		$user->fullname 		= $request->fullname;
 		$user->phonenumber 		= $request->phonenumber;
@@ -49,6 +48,8 @@ class UserController extends Controller {
 		}
 		$user->save();
 		Auth::attempt(['username'=>$user->username,'password'=>$user->password]);
-		return redirect('user/member/index');
+		if(Auth::user()->level==1)
+			return redirect('users/members/index');
+		return redirect('admin');
 	}
 }

@@ -1,129 +1,115 @@
-@extends('users.index')
-
-@section('button_header')
-	<div class="info_member">
-		<div class = "fullname_member">
-			<img src="{!!url('resources/upload/avatar')!!}/{!!Auth::user()->avatar!!}" alt="Avatar" class="avatar">
-		</div>
-		<ul>g
-			<li><a href="{!!url('member/update')!!}/{!!Auth::user()->id!!}">Cập nhật</a></li>
-			<li><a href="{!!url('/auth/logout')!!}">Đăng xuất</a></li>
-		</ul>
-	</div>
-	<span class="fullname">{!!Auth::user()->fullname!!}</span>
+@extends('app')
+@section('title')
+Cập Nhật Thông Tin Thành Viên
 @stop
 @section('content')
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading center_align">Cập nhật thông tin</div>
+				<div class="panel-heading">Cập Nhật Thông Tin Thành Viên</div>
 				<div class="panel-body">
-					<!-- Hiển thị thông báo thành công hoặc thất bại -->
-					@if(Session::has('flash_message'))
-						<div class = "alert alert-{!!Session::get('flash_level')!!} message">
-							{!!Session::get('flash_message')!!}
-						</div>
-					@endif
-					<!-- Hiện thông báo khi gặp lỗi về việc nhập dữ liệu đầu vào -->
 					@if (count($errors) > 0)
-						<div class="alert alert-danger message">
-							<strong>Lỗi!</strong> Xảy ra một vài vấn đề với dữ liệu nhập vào<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
+						<div class="alert alert-danger">
+							<strong>Ôi !!!</strong><br/> Đã có lỗi xảy ra<br><br>
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('user.member.postUpdate') }}" id = "updateForm" enctype = "multipart/form-data">
+					<form class="form-horizontal" role="form" method="POST" action="{{ route('user.member.postUpdate') }}" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="id" value = "{!!Auth::user()->id!!}">
+
 						<div class="form-group">
-							<label class="col-md-4 control-label">Username *</label>
+							<label class="col-md-4 control-label">Tên Đăng Nhập</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="username" value="{{$user->username}}">
+								<input type="text" class="form-control" name="username" value="{{ Auth::user()->username }}">
 							</div>
+							<div style="color:red">{!! $errors->first('username') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address *</label>
+							<label class="col-md-4 control-label">Địa Chỉ Email</label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{$user->email}}" disabled>
+								<input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" disabled>
 							</div>
+							<div style="color:red">{!! $errors->first('email') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Mật Khẩu Mới </label>
+							<label class="col-md-4 control-label">Mật Khẩu Mới</label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password">
 							</div>
+							<div style="color:red">{!! $errors->first('password') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Xác Nhận Mật Khẩu </label>
+							<label class="col-md-4 control-label">Xác Nhận Mật Khẩu Mới</label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password_confirmation">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Fullname *</label>
+							<label class="col-md-4 control-label">Giới Tính</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="fullname" value="{{$user->fullname}}">
+								Nam <input type="radio" name="gender" value="1" {{ Auth::user()->gender==1?'checked':"" }}>
+								Nữ <input type="radio" name="gender" value="2" {{ Auth::user()->gender==2?'checked':"" }}>
 							</div>
+							<div style="color:red">{!! $errors->first('gender') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Gender *</label>
-							<div class="col-md-4" style = "">
-								@if($user->gender==1) 
-									<input type="radio" name="gender" value = "1" style = "margin-top:10px" {{ Auth::user()->gender==1?checked:"" }}> Male
-									<input type="radio" name ="gender" value = "2"> Female
-								@else
-									<input type="radio" name="gender" value = "Male" style = "margin-top:10px"> Male
-									<input type="radio" name ="gender" value = "Female"  checked="checked"> Female
-								@endif
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Avatar</label>
-							<div class="col-md-4">
-								<input type="file" name="avatar"  style="margin-top: 5px; border: 1px solid #CCCCCC; width: 290px; border-radius: 5px;" value = "{{old('avatar')}}"> 
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Company</label>
+							<label class="col-md-4 control-label">Tên Đầy Đủ</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="company" value="{{ $user->company }}">
+								<input type="text" class="form-control" name="fullname" value="{{ Auth::user()->fullname }}">
 							</div>
+							<div style="color:red">{!! $errors->first('fullname') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Address *</label>
+							<label class="col-md-4 control-label">Số Điện Thoại</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="address" value="{{ $user->address }}">
+								<input type="text" class="form-control" name="phonenumber" value="{{ Auth::user()->phonenumber }}">						
 							</div>
+							<div style="color:red">{!! $errors->first('phonenumber') !!}</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Phone Number *</label>
+							<label class="col-md-4 control-label">Địa Chỉ</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="phone_number" value="{{ $user->phone_number }}">
+								<input type="text" class="form-control" name="address" value="{{ Auth::user()->address }}">						
+							</div>
+							<div style="color:red">{!! $errors->first('address') !!}</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Công Ty</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="company" value="{{ Auth::user()->company }}">						
 							</div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-md-8 col-md-offset-4">
+							<label class="col-md-4 control-label">Ảnh Đại Diện</label>
+							<div class="col-md-6">
+								<img src="{!!url('resources/upload/avatar/'.(!empty(Auth::user()->avatar)?Auth::user()->id.'/'.Auth::user()->avatar:'default/default.jpg'))!!}" alt="" height="90px">						
+							</div>
+							<div style="color:red">{!! $errors->first('avatar') !!}</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Chọn Ảnh Mới</label>
+							<div class="col-md-6">
+								<input type="file" name="avatar" value="{!! old('avatar') !!}">						
+							</div>
+							<div style="color:red">{!! $errors->first('avatar') !!}</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									Cập nhật
-								</button>
-								<input type="reset" value = "Nhập lại" class="btn btn-primary" id="reset_form">
-								<button type="button" class="btn btn-primary" onclick = "window.location = '../../member'">
-									Quay lại
+									Cập Nhật
 								</button>
 							</div>
 						</div>
@@ -133,4 +119,4 @@
 		</div>
 	</div>
 </div>
-@stop
+@endsection

@@ -50,7 +50,7 @@ class AuthController extends Controller {
 		//lại gọi đến phương thức khởi tạo một lần
 		//Từ khóa except chỉ định action không bị ảnh hưởng=>getLogout sẽ không bị ảnh hưởng bởi middleware
 		
-		$this->middleware('guest', ['except' => array('getLogout','getDelete','getList')]);
+		$this->middleware('guest', ['except' => array('getLogout')]);
 	}
 
 	public function postLogin(Request $request)
@@ -156,27 +156,5 @@ class AuthController extends Controller {
 		//Xác nhận xong sẽ tự động đăng nhập vào tài khoản
 		return redirect('auth/login')->with(['email'=>$data[0]['username']]);
 		}
-	}
-
-	public function getList(){
-		$users = User::where(['level'=>1,'actived'=>'1'])->get();
-		return view('admin.member.list')->with(['users'=>$users]);
-	}
-
-	public function getDelete($id){
-		//Xóa dữ liệu ảnh
-		$user = User::find($id);
-		if(!empty($user->avatar)){
-			$p_folder = 'resources/upload/avatar/'.$id.'/';
-			if(file_exists($p_folder.$user->avatar)){
-				unlink($p_folder.$user->avatar);
-			}
-			if(is_dir($p_folder)){
-				rmdir($p_folder);
-			}
-		}
-		DB::table('password_resets')->where('email',$user->email)->delete();
-		$user->delete();
-		return redirect('admin');
 	}
 }

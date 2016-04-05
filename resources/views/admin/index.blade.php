@@ -18,7 +18,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
  -->
-	<script type = "text/javascript" src = "{!!url('public/js/admin.js')!!}"></script>
+	<script type = "text/jdẽ.bladeavascript" src = "{!!url('public/js/admin.js')!!}"></script>
 	{{-- Script cho việc flash message --}}
 	<script type = "text/javascript" src = "{!!url('public/js/my_script.js')!!}"></script>
 </head>
@@ -42,7 +42,7 @@
 		<div id="nav">
 			<div class="info_admin">
 				<img src="{!!url('resources/upload/avatar/'.(!empty(Auth::user()->avatar)?Auth::user()->id.'/'.Auth::user()->avatar:'default/default.jpg'))!!}" alt="" height="45px" width="45px">
-				<span>Admin<br/>{{Auth::user()->fullname}}</span>
+				<span>Admin<br/>{{Auth::user()->username}}</span>
 			</div>
 			<div class="search_box">
 				<form action="" method ="POST" >

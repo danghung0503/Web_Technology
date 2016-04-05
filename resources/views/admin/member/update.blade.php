@@ -12,99 +12,79 @@
 					@include('admin.alert')
 					@include('admin.error')
 					
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('admin.member.postUpdate') }}" id = "updateForm" enctype = "multipart/form-data">
+					<form class="form-horizontal" method="POST" action="{{ route('admin.member.postUpdate') }}" id = "updateForm">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="id" value = "{!!$user->id!!}">
 						<div class="form-group">
-							<label class="col-md-4 control-label">Username *</label>
+							<label class="col-md-4 control-label">Tên Đăng Nhập *</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="username" value="{{$user->username}}">
+								<input type="text" class="form-control" name="username" value="{{$user->username}}" disabled>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address *</label>
+							<label class="col-md-4 control-label">Địa Chỉ Email *</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{$user->email}}" disabled>
 							</div>
 						</div>
 
+
 						<div class="form-group">
-							<label class="col-md-4 control-label">New Password </label>
+							<label class="col-md-4 control-label">Họ Tên *</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
+								<input type="text" class="form-control" name="fullname" value="{{$user->fullname}}" disabled>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Confirm Password </label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Fullname *</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="fullname" value="{{$user->fullname}}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Gender *</label>
+							<label class="col-md-4 control-label">Giới Tính *</label>
 							<div class="col-md-4" style = "">
 								@if($user->gender==1) 
-									<input type="radio" name="gender" value = "Male" style = "margin-top:10px" checked="checked"> Male
-									<input type="radio" name ="gender" value = "Female"> Female
+									<label class="col-md-4 control-label">Nam</label>
 								@else
-									<input type="radio" name="gender" value = "Male" style = "margin-top:10px"> Male
-									<input type="radio" name ="gender" value = "Female"  checked="checked"> Female
+									<label class="col-md-4 control-label">Nữ</label>
 								@endif
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Avatar</label>
+							<label class="col-md-4 control-label">Ảnh Đại Diện</label>
 							<div class="col-md-6">
-								<input type="file" name="avatar"  style="margin-top: 5px; border: 1px solid #CCCCCC; width: 100%; border-radius: 5px;" value = "{{old('avatar')}}"> 
+								<img src="{!!url('resources/upload/avatar/'.(!empty($user->avatar)?$user->id.'/'.$user->avatar:'default/default.jpg'))!!}" alt="" height="90px" width="90px" />
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Company</label>
+							<label class="col-md-4 control-label">Công Ty</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="company" value="{{ $user->company }}">
+								<input type="text" class="form-control" name="company" value="{{ $user->company }}" disabled>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Address *</label>
+							<label class="col-md-4 control-label">Địa Chỉ</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="address" value="{{ $user->address }}">
+								<input type="text" class="form-control" name="address" value="{{ $user->address }}" disabled>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Phone Number *</label>
+							<label class="col-md-4 control-label">Số Điện Thoại</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="phone_number" value="{{ $user->phone_number }}">
+								<input type="text" class="form-control" name="phonenumber" value="{{ $user->phonenumber }}" disabled>
 							</div>
 						</div>
 
-						@if(Auth::user()->role=='admin'&&Auth::user()->id != $user->id)
 						<div class="form-group">
-							<label class="col-md-4 control-label">Role *</label>
-							<div class="col-md-6" style = "">
-								@if($user->role=='manager')
-								<input type="radio" name="role" value = "manager" style = "margin-top:10px" checked="checked"> Manager
-								<input type="radio" name ="role" value = "member"> Member
-								@else
-								<input type="radio" name="role" value = "manager" style = "margin-top:10px"> Manager
-								<input type="radio" name ="role" value = "member"  checked="checked"> Member
-								@endif
+							<label class="col-md-4 control-label">Thay đổi cấp độ</label>
+							<div class="col-md-6">
+								<select name="level">
+									<option value="1" {{ $user->level==1?'selected':"" }}>Thành Viên</option>
+									<option value="2" {{ $user->level==2?'selected':"" }}>Admin</option>
+								</select>
 							</div>
 						</div>
-						@endif
 
 						<div class="form-group">
 							<div class="col-md-7 col-md-offset-4">

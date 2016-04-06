@@ -91,7 +91,6 @@
 								<button type="submit" class="btn btn-primary">
 									Cập nhật
 								</button>
-								<input type="reset" value = "Nhập lại" class="btn btn-primary" id="reset_form">
 								<button type="button" class="btn btn-primary" onclick = "window.location = '../list'">
 									Quay lại
 								</button>

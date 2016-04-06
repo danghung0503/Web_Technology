@@ -7,8 +7,4 @@ class ProductGroup extends Model {
 	protected $fillable = ['id','name'];
 
 	public $timestamps = false;
-
-	public function brand(){
-		return $this->hasMany('App\brand');
-	}
 }

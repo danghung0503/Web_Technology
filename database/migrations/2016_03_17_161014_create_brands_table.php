@@ -19,8 +19,6 @@ class CreateBrandsTable extends Migration {
 			$table->string('logo');
 			$table->string('country');
 			$table->text('description');
-			$table->integer('id_productgroup')->unsigned();
-			$table->foreign('id_productgroup')->references('id')->on('product_groups')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

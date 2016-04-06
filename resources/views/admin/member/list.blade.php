@@ -15,7 +15,9 @@
 		{{-- Hiện thông báo thành công hoặc thất bại --}}
 		@include('admin.alert')
 		{{-- Hiện phân trang --}}
-		{{--{!!$users->render()!!}--}}
+		{!!$users->render()!!}
+		<form action = "{!!route('admin.member.postDelete')!!}" method = "POST" id = "listForm">
+			<input type="hidden" name = "_token" value = "{!!csrf_token()!!}">
 		<table>
 			<thead>
 				<tr>
@@ -32,7 +34,7 @@
 					<th>Công Ty</th>
 					<th>Địa Chỉ</th>
 					<th>Số Điện Thoại</th>
-					<th>Quyền</th>
+					{{--<th>Quyền</th>--}}
 					{{-- <th>Ngày tạo lập</th>
 					<th>Lần chỉnh sửa trước</th> --}}
 				</tr>
@@ -46,8 +48,8 @@
 							<input type="checkbox" name = "check[]" value = "{!!$user->id!!}">
 						</td>
 						<td class = "center_align">{!!$id!!}</td>
-						<td class = "center_align"><a href="{!!url('admin/member/update')!!}/{!!$user->id!!}">Sửa</a></td>
-						{{--<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá thành viên {!!$user->username!!} không?')" href="{!!url('admin/member/delete')!!}/{!!$user->id!!}">Xóa</a></td>--}}
+						{{--<td class = "center_align"><a href="{!!url('admin/member/update')!!}/{!!$user->id!!}">Sửa</a></td>--}}
+						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá thành viên {!!$user->username!!} không?')" href="{!!url('admin/member/delete')!!}/{!!$user->id!!}"><img src="{{ url('public/images/icon/b_drop.png') }}" width=15 >Xóa</a></td>
 						<td>{!!$user->username!!}</td>
 						<td>{!!$user->email!!}</td>
 						<td>{!!$user->fullname!!}</td>
@@ -56,13 +58,12 @@
 						<td>{!!empty($user->company)?'Không có':$user->company!!}</td>
 						<td>{!!$user->address!!}</td>
 						<td>{!!$user->phonenumber!!}</td>
-						<td>{!!$user->level==2?"Admin":"Thành viên"!!}</td>
-						<!-- <td>{!!$user->created_at!!}</td>
-						<td>{!!$user->updated_at!!}</td> -->
+						<!--<td>{!!$user->level==2?"Admin":"Thành viên"!!}</td>-->
 					</tr>
 				@endforeach		
 			</tbody>
 		</table>
 		<br>
 		<input type="submit" name = "delete_choose" value = "Xóa chọn" class = "btn btn-success" onclick = "return confirm('Bạn có muốn xóa các thành viên được chọn?')">
+	</form>
 @stop

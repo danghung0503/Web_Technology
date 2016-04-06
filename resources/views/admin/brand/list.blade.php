@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<form action = "{!!route('admin.company.postDelete')!!}" method = "POST" id = "listForm">
+	<form action = "{!!route('admin.brand.postDelete')!!}" method = "POST" id = "listForm">
 		<input type="hidden" name = "_token" value = "{!!csrf_token()!!}">
 		<table>
 			<thead>
@@ -17,39 +17,45 @@
 		{{-- Hiện thông báo thành công hoặc thất bại --}}
 		@include('admin.alert')
 		{{-- Hiện phân trang --}}
-		{!!$companies->render()!!}
+		{!!$brands->render()!!}
 		<table>
 			<thead>
 				<tr>
 					<th>
 						<input type="checkbox" name = "checkall" onclick = "toggle(this)">
 					</th>
-					<th>Id</th>
+					<th>STT</th>
 					<th></th>
 					<th></th>
-					<th>Company name</th>
+					<th>Tên hãng</th>
 					<th>Logo</th>
-					<th>Country</th>
+					<th>Quốc gia</th>
+					<th>Mô tả</th>
 					<th>Ngày tạo lập</th>
 					<th>Lần chỉnh sửa trước</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php $id = 0?>
-				@foreach($companies as $company)
+				@foreach($brands as $brand)
 					<?php $id++ ?>
 					<tr>
 						<td class = "center_align">
-							<input type="checkbox" name = "check[]" value = "{!!$company->id!!}">
+							<input type="checkbox" name = "check[]" value = "{!!$brand->id!!}">
 						</td>
 						<td class = "center_align">{!!$id!!}</td>
-						<td class = "center_align"><a href="{!!url('admin/company/update')!!}/{!!$company->id!!}">Sửa</a></td>
-						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá hãng sản xuất {!!$company->company_name!!} không?\n Xóa hãng sẽ làm mất tất cả các sản phẩm của hãng, hãy cân nhắc!')" href="{!!url('admin/company/delete')!!}/{!!$company->id!!}">Xóa</a></td>
-						<td>{!!$company->company_name!!}</td>
-						<td class = "center_align"><img src="{!!url('resources/upload/company')!!}/{!!$company->logo!!}" alt="" height="45px" width="45px"></td>
-						<td>{!!$company->country!!}</td>
-						<td>{!!$company->created_at!!}</td>
-						<td>{!!$company->updated_at!!}</td>
+						<td class = "center_align"><a href="{!!url('admin/brand/update')!!}/{!!$brand->id!!}">Sửa</a></td>
+						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá hãng sản xuất {!!$brand->name!!} không?\n Xóa hãng sẽ làm mất tất cả các sản phẩm của hãng, hãy cân nhắc!')" href="{!!url('admin/brand/delete')!!}/{!!$brand->id!!}">Xóa</a></td>
+						<td>{!!$brand->name!!}</td>
+						<td class = "center_align"><img src="{!!url('resources/upload/brand')!!}/{!!$brand->logo!!}" alt="" height="45px" width="45px"></td>
+						<td>{!!$brand->country!!}</td>
+						<td>{!!strlen($brand->description)>35?substr($brand->description,0,30).'...':$brand->description!!}</td>
+						<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($brand->created_at))
+                    ->diffforHumans() 
+                !!}</td>
+                		<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($brand->updated_at))
+                    ->diffforHumans()
+                !!}</td>
 					</tr>
 				@endforeach		
 			</tbody>

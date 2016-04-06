@@ -31,16 +31,18 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 	//Quản lý thành viên
 	Route::group(['prefix'=>'member'],function(){
 		Route::get('list',['as'=>'admin.member.getList','uses'=>'HomeController@getList']);
-		Route::get('update/{id}',['as'=>'admin.member.getUpdate','uses'=>'HomeController@getUpdate']);
-		Route::post('update',['as'=>'admin.member.postUpdate','uses'=>'HomeController@postUpdate']);				
-		//Route::get('delete/{id}',['as'=>'admin.member.getDelete','uses'=>'Auth\AuthController@getDelete']);
+	//	Route::get('update/{id}',['as'=>'admin.member.getUpdate','uses'=>'HomeController@getUpdate']);
+	//	Route::post('update',['as'=>'admin.member.postUpdate','uses'=>'HomeController@postUpdate']);				
+		Route::get('delete/{id}',['as'=>'admin.member.getDelete','uses'=>'HomeController@getDelete']);
+		Route::post('delete',['as'=>'admin.member.postDelete','uses'=>'HomeController@postDelete']);
+
 		});
 	//Quản lý nhóm sản phẩm
 	Route::group(['prefix'=>'productgroup'],function(){
 		Route::get('add',['as'=>'admin.productgroup.getAdd','uses'=>'Product\ProductGroupController@getAdd']);
 		Route::post('add',['as'=>'admin.productgroup.postAdd','uses'=>'Product\ProductGroupController@postAdd']);
-		Route::get('edit/{id}',['as'=>'admin.productgroup.getEdit','uses'=>'Product\ProductGroupController@getEdit']);
-		Route::post('edit/{id}',['as'=>'admin.productgroup.postEdit','uses'=>'Product\ProductGroupController@postEdit']);
+		Route::get('update/{id}',['as'=>'admin.productgroup.getUpdate','uses'=>'Product\ProductGroupController@getUpdate']);
+		Route::post('update/{id}',['as'=>'admin.productgroup.postUpdate','uses'=>'Product\ProductGroupController@postUpdate']);
 		Route::get('delete/{id}',['as'=>'admin.productgroup.getDelete','uses'=>'Product\ProductGroupController@getDelete']);
 	});
 	//Quản lý hãng sản xuất sản phẩm
@@ -48,16 +50,17 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 		Route::get('list',['as'=>'admin.brand.getList','uses'=>'Product\BrandController@getList']);
 		Route::get('add',['as'=>'admin.brand.getAdd','uses'=>'Product\BrandController@getAdd']);
 		Route::post('add',['as'=>'admin.brand.postAdd','uses'=>'Product\BrandController@postAdd']);
-		Route::get('edit/{id}',['as'=>'admin.brand.getEdit','uses'=>'Product\BrandController@getEdit']);
-		Route::post('edit/{id}',['as'=>'admin.brand.postEdit','uses'=>'Product\BrandController@postEdit']);
+		Route::get('update/{id}',['as'=>'admin.brand.getUpdate','uses'=>'Product\BrandController@getUpdate']);
+		Route::post('update',['as'=>'admin.brand.postUpdate','uses'=>'Product\BrandController@postUpdate']);
 		Route::get('delete/{id}',['as'=>'admin.brand.getDelete','uses'=>'Product\BrandController@getDelete']);
+		Route::post('delete',['as'=>'admin.brand.postDelete','uses'=>'Product\BrandController@postDelete']);
 	});
 	//Quản lý sản phẩm
 	Route::group(['prefix'=>'product'],function(){
 		Route::get('add',['as'=>'admin.product.getAdd','uses'=>'Product\ProductController@getAdd']);
 		Route::post('add',['as'=>'admin.product.postAdd','uses'=>'Product\ProductController@postAdd']);
-		Route::get('edit/{id}',['as'=>'admin.product.getEdit','uses'=>'Product\ProductController@getEdit']);
-		Route::post('edit/{id}',['as'=>'admin.product.postEdit','uses'=>'Product\ProductController@postEdit']);
+		Route::get('update/{id}',['as'=>'admin.product.getUpdate','uses'=>'Product\ProductController@getupdate']);
+		Route::post('update/{id}',['as'=>'admin.product.postUpdate','uses'=>'Product\ProductController@postupdate']);
 		Route::get('delete/{id}',['as'=>'admin.product.getDelete','uses'=>'Product\ProductController@getDelete']);
 	});
 	//Quản lý tin tức

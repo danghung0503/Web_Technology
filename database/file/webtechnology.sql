@@ -313,8 +313,6 @@ ALTER TABLE `users`
 --
 -- Constraints for table `brands`
 --
-ALTER TABLE `brands`
-ADD CONSTRAINT `brands_id_productgroup_foreign` FOREIGN KEY (`id_productgroup`) REFERENCES `product_groups` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `image_details`

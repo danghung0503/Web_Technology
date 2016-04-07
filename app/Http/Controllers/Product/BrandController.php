@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests\BrandRequest;
@@ -44,12 +43,14 @@ class BrandController extends Controller {
 	public function postUpdate(BrandUpdateRequest $request){
 		$brand = Brand::find($request->id);
 		$brand->name = $request->name;
-		echo $brand->name;
 		$brand->country = $request->country;
 		$brand->description = $request->description;
 		$id = $brand->id;
+		$p_folder = 'resources/upload/brand/';
+		if(file_exists($p_folder.$brand->logo)){
+			unlink($p_folder.$brand->logo);
+		}
 		if(input::hasFile('logo')){	//Nếu tồn tại file
-			$p_folder = 'resources/upload/brand/';
 			$logo_name = $id.'_'.$request->file('logo')->getClientOriginalName();
 			$request->file('logo')->move($p_folder,$logo_name);
 			$brand->logo = $logo_name;
@@ -58,19 +59,29 @@ class BrandController extends Controller {
 		return redirect('admin/brand/list');
 	}
 	public function getDelete($id){
-		$brand->name = $request->name;
-		$brand->country = $request->country;
-		$brand->description = $request->description;
-		$id = $brand->id;
-		if(input::hasFile('logo')){	//Nếu tồn tại file
-			$p_folder = 'resources/upload/brand/';
-			$old_img = $p_folder.$brand->logo;
-			if(file_exists($old_img)){
-				unlink($old_img);
+		$brand = Brand::find($id);
+		if(!empty($brand->logo)){
+				$url = 'resources/upload/brand/'.$brand->logo;
+				if(file_exists($url)){
+					unlink($url);
+				}
 			}
-			$logo_name = $id.'_'.$request->file('logo')->getClientOriginalName();
-			$request->file('logo')->move($p_folder,$logo_name);
-			$brand->logo = $logo_name;
+		$brand->delete();
+		return redirect('admin/brand/list');
+	}
+
+	public function postDelete(Request $request){
+		$array = $request->check;
+		foreach($array as $id){
+			$brand = Brand::find($id);
+			//Xóa ảnh
+			if(!empty($brand->logo)){
+				$url = 'resources/upload/brand/'.$brand->logo;
+				if(file_exists($url)){
+					unlink($url);
+				}
+			}
+			$brand->delete();
 		}
 		return redirect('admin/brand/list');
 	}

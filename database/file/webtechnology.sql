@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 11:34 AM
+-- Generation Time: Apr 07, 2016 at 01:46 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -32,10 +32,30 @@ CREATE TABLE IF NOT EXISTS `brands` (
   `logo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `id_productgroup` int(10) unsigned NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `logo`, `country`, `description`, `created_at`, `updated_at`) VALUES
+(3, 'Samsung', '3_Samsung_Logo.svg.png', 'Korea', 'Sam sung là công ty điện tử hàng đầu thế giới', '1970-04-06 03:28:21', '2016-04-06 07:45:29'),
+(4, 'Apple', '4_vforum (4).jpg', 'United States', 'Hãng xanh nhất', '2016-04-06 04:41:02', '2016-04-06 04:41:02'),
+(6, 'Huawei', '6_vforum (7).jpg', 'China', 'Huawei ! Khăng định chất lượng Tàu', '2016-04-06 06:13:48', '2016-04-06 06:13:48'),
+(9, 'HTC', '9_vforum (76).jpg', 'Taiwan', 'HTC ! khẳng định chất lượng trong tầm tay', '2016-04-06 06:17:25', '2016-04-06 06:57:32'),
+(10, 'BlackBerry', '10_templatemo_image_05.jpg', 'United States', 'Blackberry là hãng điện thoại bảo mật tốt nhất hiện nay', '2016-04-06 06:48:21', '2016-04-06 06:48:21'),
+(11, 'Sony', '11_vforum (109).jpg', 'Japan', 'Sony là thương hiệu dẫn đầu về chống nước cho thiết bị di động', '2016-04-06 06:51:59', '2016-04-06 06:51:59'),
+(12, 'Viettel', '12_vforum (46).jpg', 'Vietnam', 'Viettel! Hãy nói theo cách của bạn và tính tiền theo cách của chúng tôi', '2016-04-06 06:54:01', '2016-04-06 06:54:01'),
+(13, 'BKAV', '13_hinh-nen-girl-xinh-nhat-hd-53.jpg', 'Vietnam', 'BKAV! Hãng bảo mật hàng đầu Việt Nam', '2016-04-06 06:56:00', '2016-04-07 00:06:00'),
+(14, 'Oppo', '14_vforum (110).jpg', 'United States', 'Hãng Oppo', '2016-04-06 20:56:01', '2016-04-06 21:01:33'),
+(15, 'FPT', '15_vforum (4).png', 'Vietnam', 'FPT hãng phần mềm hàng đầu Việt Nam', '2016-04-06 21:03:08', '2016-04-06 21:03:08'),
+(16, 'VAIO', '16_vforum (1).jpg', 'Japan', 'VAIO - thương hiệu sản xuất laptop chuẩn mực', '2016-04-06 21:04:36', '2016-04-06 21:04:36'),
+(17, 'Sky', '17_gamela9-girl-xinh-30-275x300.jpg', 'Korea', 'Sky- Chất lượng luôn trên tầm giá', '2016-04-06 21:05:56', '2016-04-06 21:05:57'),
+(18, 'MSI', '18_anh-girl-xinh-.jpg', 'United States', 'MSI - thương hiệu sản xuất máy tính gaming hàng dầu', '2016-04-06 21:07:16', '2016-04-06 21:07:16'),
+(19, 'Lenovo', '19_hinh-nen-gai-xinh-cho-may-tinh-4.jpg', 'Taiwan', 'Lenovo', '2016-04-06 21:08:06', '2016-04-06 21:14:31'),
+(20, 'ASUS', '20_hot 11_QLNP.jpg', 'Taiwan', 'ASUS - thiết kế đẹp', '2016-04-06 21:09:31', '2016-04-06 21:15:01');
 
 -- --------------------------------------------------------
 
@@ -105,6 +125,15 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2016_03_17_163830_create_products_table', 5),
 ('2016_03_17_220526_create_image_details_table', 6),
 ('2016_03_17_224109_create_customers_table', 7),
+('2016_03_17_224824_create_orders_table', 8),
+('2014_10_12_000000_create_users_table', 1),
+('2014_10_12_100000_create_password_resets_table', 1),
+('2016_03_17_131511_create_contacts_table', 2),
+('2016_03_17_132631_create_product_groups_table', 3),
+('2016_03_17_161014_create_brands_table', 4),
+('2016_03_17_163830_create_products_table', 5),
+('2016_03_17_220526_create_image_details_table', 6),
+('2016_03_17_224109_create_customers_table', 7),
 ('2016_03_17_224824_create_orders_table', 8);
 
 -- --------------------------------------------------------
@@ -138,10 +167,9 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('danghung3136@gmail.com', 'bbbed6d3afcd33bf22cec74626fbc807377eff2824424039ffd8330fa8ced10f', '2016-03-27 01:19:05'),
 ('demo10@gmail.com', '3gLfQemUqae5KRtvXxbCUc9vmy97z9', '0000-00-00 00:00:00'),
-('demo8@gmail.com', 'LpiE6znpiaFekpTTXixeb1qLnNEfuW', '0000-00-00 00:00:00'),
-('thanhtung.tvg95@gmail.com', '4as2tApEt0Ssds83IvQFIe2awXb8PP', '0000-00-00 00:00:00'),
+('khanhnd@gmail.com', 'Axx3MfccZbeuk85yiJqsdpEzAx0fu0kC', '0000-00-00 00:00:00'),
+('demo10@gmail.com', '3gLfQemUqae5KRtvXxbCUc9vmy97z9', '0000-00-00 00:00:00'),
 ('khanhnd@gmail.com', 'Axx3MfccZbeuk85yiJqsdpEzAx0fu0kC', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -203,11 +231,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `gender`, `fullname`, `phonenumber`, `address`, `company`, `avatar`, `level`, `actived`, `verification_code`, `remember_token`) VALUES
-(1, 'Admin', 'danghung3136@gmail.com', '$2y$10$QE2zOFTbA6nXhJXa4OopreUE0D5BrD4cRCH3ChhvMOh9GerUjzzbO', 1, 'Đặng Văn Hùng', 123456789, 'Hai Bà Trưng-Hà Nội-Việt Nam', 'Công ty CNTT', '20160318_095245.jpg', 2, 1, '', 'Gavp2ngueV8JUkiuDKtkUJNIycVN0f7h1HPEolykVHzkH3LSwvPPDUa3WoQ2'),
+(1, 'Hùng CNTT2.04', 'danghung3136@gmail.com', '$2y$10$QE2zOFTbA6nXhJXa4OopreUE0D5BrD4cRCH3ChhvMOh9GerUjzzbO', 1, 'Đặng Văn Hùng', 123456789, 'Hai Bà Trưng-Hà Nội-Việt Nam', 'Công ty CNTT', 'Onebilliondollarcloseup.jpg', 2, 1, '', 'Gavp2ngueV8JUkiuDKtkUJNIycVN0f7h1HPEolykVHzkH3LSwvPPDUa3WoQ2'),
 (28, 'demo10', 'demo10@gmail.com', '$2y$10$rwgpvHaDSFmo.xE5Eue1/.uZKd9g77lA7XKFaNO4Ff5rCLQ9fbQr6', 1, 'demo10', 1234567890, 'demo10-demo10-demo10', 'Công ty đại diện', '20160123_090949.jpg', 1, 1, '', 'r4V1F3sSOjS4YzJVcxYUL2AcILqZrVn2EvaBIOh0ohn0Tw6DCihIgTQS527u'),
-(30, 'demo9', 'demo8@gmail.com', '$2y$10$m3w6quO9PtcjhVSfxhlzouS3xwryQWlH4PwiTq1tIh.DBHhihqxTK', 1, 'demo9', 1234567890, 'demo9-demo9-demo9', 'Công ty đại diện 9', '20160127_075710.jpg', 1, 0, 'bRlTTI1adoHC0jqGWXaf8i73j1xpKZ', 'NulNtvpJKJ3g6aRY1Ic7XxjsXvJFnE0hC8L65E5O'),
-(32, 'demo2', 'thanhtung.tvg95@gmail.com', '$2y$10$G2PjOR2n8L1ugf55TVshU.pruM768iX32v9j28IgkRgNhuXIHk1zW', 1, 'demo2', 1234567890, 'demo-demo-demo', 'Công ty đại diện', '20160127_075710.jpg', 1, 1, '', 'Ch3Rsg1HSVb5Y8E7bgVMsInU5viooQynqlTZDoGC5XGpjoG96DMiOH6ogMrm'),
-(34, 'khanhnd', 'khanhnd@gmail.com', '$2y$10$egpx.31Vf1toySjSm/lxxOLNpiTpIj.DgFHNeRiLIlTNEBk4FYsPO', 1, 'Nguyễn Duy Khánh', 1234567890, 'Hai Bà Trưng-Hà Nội', '', '20160316_114529_Pano.jpg', 2, 1, '', 'a8gJGZ2OO6YsUCUvdniyFzhQ5Tg8VrdwkvRN6I2i');
+(32, 'demo2', 'thanhtung.tvg95@gmail.com', '$2y$10$G2PjOR2n8L1ugf55TVshU.pruM768iX32v9j28IgkRgNhuXIHk1zW', 1, 'demo2', 1234567890, 'demo-demo-demo', 'Công ty đại diện', '', 1, 1, '', 'Ch3Rsg1HSVb5Y8E7bgVMsInU5viooQynqlTZDoGC5XGpjoG96DMiOH6ogMrm'),
+(34, 'khanhnd', 'khanhnd@gmail.com', '$2y$10$egpx.31Vf1toySjSm/lxxOLNpiTpIj.DgFHNeRiLIlTNEBk4FYsPO', 1, 'Nguyễn Duy Khánh', 1234567890, 'Hai Bà Trưng-Hà Nội', '', '20160316_114529_Pano.jpg', 1, 1, '', 'a8gJGZ2OO6YsUCUvdniyFzhQ5Tg8VrdwkvRN6I2i');
 
 --
 -- Indexes for dumped tables
@@ -217,7 +244,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `gender`, `fullname`
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
-  ADD PRIMARY KEY (`id`), ADD KEY `brands_id_productgroup_foreign` (`id_productgroup`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contacts`
@@ -275,7 +302,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `contacts`
 --
@@ -308,10 +335,6 @@ ALTER TABLE `users`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- Constraints for dumped tables
---
-
---
--- Constraints for table `brands`
 --
 
 --

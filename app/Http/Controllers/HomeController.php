@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use App\Http\Requests;
 use Auth;
 use App\User;
 use DB;
@@ -69,8 +70,8 @@ class HomeController extends Controller {
 		return redirect('admin/member/list');
 	}
 
-	public function postDelete(){
-		$array = $_POST["check"];
+	public function postDelete(Request $request){
+		$array = $request->check;
 		foreach($array as $id){
 			$user = User::find($id);
 			if(!empty($user->avatar)){

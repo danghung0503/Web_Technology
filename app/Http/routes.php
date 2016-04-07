@@ -57,6 +57,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 	});
 	//Quản lý sản phẩm
 	Route::group(['prefix'=>'product'],function(){
+		Route::get('list',['as'=>'admin.product.getList','uses'=>'Product\ProductController@getList']);		
 		Route::get('add',['as'=>'admin.product.getAdd','uses'=>'Product\ProductController@getAdd']);
 		Route::post('add',['as'=>'admin.product.postAdd','uses'=>'Product\ProductController@postAdd']);
 		Route::get('update/{id}',['as'=>'admin.product.getUpdate','uses'=>'Product\ProductController@getupdate']);
@@ -64,7 +65,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 		Route::get('delete/{id}',['as'=>'admin.product.getDelete','uses'=>'Product\ProductController@getDelete']);
 	});
 	//Quản lý tin tức
-	
+			
 	//Quản lý thống kê
 });
 Route::group(['prefix'=>'users'],function(){

@@ -36,10 +36,10 @@ class UserController extends Controller {
 		//Nếu tồn tại file để thay đổi ảnh đại diện
 		if(!empty($request->file('avatar'))){
 			$img_name = $request->file('avatar')->getClientOriginalName();
-			$request->file('avatar')->move('resources/views/images/upload/member/'.$user->id.'/',$img_name);
+			$request->file('avatar')->move('resources/upload/avatar/'.$user->id.'/',$img_name);
 			//Nếu chưa tồn tại ảnh đại diện
 			if(!empty($user->avatar)){
-				$old_img = 'resources/views/images/upload/member/'.$user->id.'/'.$user->avatar;
+				$old_img = 'resources/upload/avatar/'.$user->id.'/'.$user->avatar;
 				if(file_exists($old_img)){
 					unlink($old_img);
 				}

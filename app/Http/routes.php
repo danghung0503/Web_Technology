@@ -57,12 +57,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 	});
 	//Quản lý sản phẩm
 	Route::group(['prefix'=>'product'],function(){
-		Route::get('list',['as'=>'admin.product.getList','uses'=>'Product\ProductController@getList']);		
-		Route::get('add',['as'=>'admin.product.getAdd','uses'=>'Product\ProductController@getAdd']);
+		Route::get('list/{type}',['as'=>'admin.product.getList','uses'=>'Product\ProductController@getList']);		
+		Route::get('add/{type}',['as'=>'admin.product.getAdd','uses'=>'Product\ProductController@getAdd']);
 		Route::post('add',['as'=>'admin.product.postAdd','uses'=>'Product\ProductController@postAdd']);
 		Route::get('update/{id}',['as'=>'admin.product.getUpdate','uses'=>'Product\ProductController@getupdate']);
-		Route::post('update/{id}',['as'=>'admin.product.postUpdate','uses'=>'Product\ProductController@postupdate']);
+		Route::post('update',['as'=>'admin.product.postUpdate','uses'=>'Product\ProductController@postupdate']);
 		Route::get('delete/{id}',['as'=>'admin.product.getDelete','uses'=>'Product\ProductController@getDelete']);
+		Route::post('delete',['as'=>'admin.product.postDelete','uses'=>'Product\ProductController@postDelete']);
+		Route::get('detail/{type}/{keywords}',['as'=>'admin.product.getDetail','uses'=>'Product\ProductController@getDetail']);
 	});
 	//Quản lý tin tức
 			

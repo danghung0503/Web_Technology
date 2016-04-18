@@ -18,7 +18,7 @@
 		<div class="h_top">
 			<div class="h_logo">
 				<a href="#">
-					<img src="{!!url('public/images/logo.png')!!}" alt="DienThoai321" title="DienThoai321">
+					<img src="{!! url('/public/images/logo.png') !!}" alt="Thế Giới Công Nghệ" title="Thế Giới Công Nghệ">
 				</a>
 			</div>
 			<div class="h_right">
@@ -36,8 +36,8 @@
 	</div> <!-- End of Header -->
 	<div id="navbar">
 		<ul class="main_menu">
-			<li class="active"><a href="{!!url('/')!!}"><img src="{!!url('public/images/iHome.png')!!}" alt=""></a></li>
-			<li><a href="#">Bán Chạy</a>
+			<li class="active"><a href="#"><img src="{{ url('/public/images/iHome.png') }}" alt=""></a></li>
+			<li><a href="#">Laptop</a>
 				<ul>
 					<li><a href="#">Acer</a></li>
 					<li><a href="#">Dell</a></li>
@@ -45,20 +45,18 @@
 					<li><a href="#">Lenovo</a></li>
 				</ul>
 			</li>
-			<li><a href="#">Sản Phẩm Mới</a></li>
-			<li><a href="#">Phụ Kiện</a></li>
-			<li><a href="">Hãng Sản Xuất</a>
+			<li><a href="#">Điện Thoại</a>
 				<ul>
-					<?php
-						$companies = DB::table('companies')->get();
-					?>
-					@foreach($companies as $company)
-						<li><a href="#">{!!$company->company_name!!}</a></li>
-					@endforeach
+					<li><a href="#">Sam Sung</a></li>
+					<li><a href="#">IPhone</a></li>
+					<li><a href="#">BPhone</a></li>
 				</ul>
 			</li>
+			<li><a href="#">Máy Tính Bảng</a></li>
+			<li><a href="#">Phụ Kiện</a></li>
 			<li><a href="#">Khuyến Mãi</a></li>
-			<li><a href="{!!url('/contact')!!}">Liên Hệ</a></li>
+			<li><a href="#">Bán Chạy</a></li>
+			<li><a href="#">Liên Hệ</a></li>
 		</ul>
 	</div> <!-- End of Navbar -->
 	<div class="clear"></div>
@@ -123,12 +121,11 @@
 			</div>
 		</div> <!-- End of Connect Us-->
 		<div class="main_footer">
-			<a href="#">Hot</a>|
-			<a href="#">Hãng Sản Xuất</a>|
+			<a href="#">Bán Chạy</a>|
 			<a href="#">Sản Phẩm Mới</a>|
 			<a href="#">Phụ Kiện</a>|
+			<a href="#">Hãng Sản Xuất</a>|
 			<a href="#">Khuyến Mãi</a>|
-			<a href="#">Bán Chạy</a>|
 			<a href="#">Liên Hệ</a>
 			<p>Bản quyền &copy 2016 thuộc về nhóm TTT </p>
 		</div> <!-- End of Main Footer -->

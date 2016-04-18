@@ -5,35 +5,36 @@
 	<title>Trang quản trị</title>
 
 	<link rel="stylesheet" href="{!!url('public/css/bootstrap.min.css')!!}">
+	<link rel="stylesheet" href="{!!url('public/css/font-awesome.min.css')!!}">
 	<link rel="stylesheet" href="{!!url('public/css/admin.css')!!}">
-	{{-- Thêm vào các css --}}
+	<!-- Thêm vào các css  -->
 	@yield('css')
 	
 	<script type = "text/javascript" src = "{!!url('public/js/jquery.min.js')!!}"></script>
 	<script type = "text/javascript" src = "{!!url('public/js/bootstrap.min.js')!!}"></script>
 	 
 
-	 {{-- Sử dụng jquery và bootstrap có sẵn trong laravel --}}
+	  <!-- Sử dụng jquery và bootstrap có sẵn trong laravel -->
 	 <!-- 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
  -->
-	<script type = "text/jdẽ.bladeavascript" src = "{!!url('public/js/admin.js')!!}"></script>
-	{{-- Script cho việc flash message --}}
+	<script type = "text/javascript" src = "{!!url('public/js/admin.js')!!}"></script>
+	<!-- Script cho việc flash message -->
 	<script type = "text/javascript" src = "{!!url('public/js/my_script.js')!!}"></script>
 </head>
 <body>
-	<div id="header">
+<div id="header">
 		<div class="logo">
-			<a href="#"><img src="{!!url('public/images/logo.png')!!}" alt="Thế Giới Công Nghệ" title = "Thế Giới Công Nghệ"></a>
+			<a href="#"><img src="{!!url('public/images/logo.png')!!}" alt="TheGioiCongNghe.Com" title = "TheGioiCongNghe.com"></a>
 		</div>
 		<div class="info_manage">
-			<a><span>Admin</span>
-				<img width='30px' height='30px' src="{!!url('resources/upload/avatar/'.(!empty(Auth::user()->avatar)?Auth::user()->id.'/'.Auth::user()->avatar:'default/default.jpg'))!!}" alt="">
+			<a><span>{!!(Auth::user()->role=='admin')?'Admin':'Manager'!!} </span>
+				<i class="fa fa-chevron-down"></i>
 			</a>
 			<ul>
-				<li><a href="{!!url('admin/member/update')!!}/{!!Auth::user()->id!!}">Cập nhật</a></li>
-				<li><a href="{!!url('/auth/logout')!!}">Đăng xuất</a></li>
+				<li><a href="{!!url('admin/member/update')!!}/{!!Auth::user()->id!!}"><i class="fa fa-gears"></i> Cập nhật</a></li>
+				<li><a href="{!!url('/auth/logout')!!}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 			</ul>
 		</div>
 	</div> <!-- End of Header -->
@@ -53,10 +54,10 @@
 				<ul>
 					<li>
 						<a>
-							{{-- <span class="glyphicon glyphicon-home"></span> --}}
-							<span class="glyphicon glyphicon-wrench"></span>
+							<!-- <span class="glyphicon glyphicon-home"></span> -->
+							<span class="glyphicon glyphicon-home"></span>
 							Quản lý hệ thống
-							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+							<i class="fa fa-chevron-right i_last"></i>
 						</a>
 						<ul>
 							<li>
@@ -84,7 +85,7 @@
 						<a>
 							<span class="glyphicon glyphicon-globe"></span>
 							Quản lý tin tức
-							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+							<i class="fa fa-chevron-right i_last"></i>
 						</a>
 						<ul>
 							<li>
@@ -123,29 +124,29 @@
 						<a>
 							<span class="glyphicon glyphicon-qrcode"></span>
 							Quản lý sản phẩm
-							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+							<i class="fa fa-chevron-right i_last"></i>
 						</a>
 						<ul>
 							<li>
-								<a href="">
+								<a href="{{ url('/admin/product/list/mobile') }}">
 									<span class="glyphicon glyphicon-earphone"></span>
 									Điện thoại
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="{{ url('/admin/product/list/laptop') }}">
 									<span class="glyphicon glyphicon-thumbs-up"></span>
-									Điện thoại mới
+									Laptop
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="{{ url('/admin/product/list/tablet') }}">
 									<span class="glyphicon glyphicon-usd"></span>
-									Điện thoại bán chạy
+									Máy tính bảng
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="{{ url('/admin/product/list/accessory') }}">
 									<span class="glyphicon glyphicon-hdd"></span>
 									Phụ kiện
 								</a>
@@ -168,7 +169,7 @@
 						<a>
 							<span class="glyphicon glyphicon-stats"></span>
 							Thống kê
-							<img src="{!!url('public/images/i_open_item.png')!!}" alt="" class="i_last">
+							<i class="fa fa-chevron-right i_last"></i>
 						</a>
 						<ul>
 							<li>

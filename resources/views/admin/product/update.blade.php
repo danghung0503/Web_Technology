@@ -5,134 +5,459 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-default">
-				<div class="panel-heading center_align">Cập Nhật Hãng Sản Xuất</div>
+				<div class="panel-heading center_align">Cập Nhật Thông Tin Sản Phẩm</div>
 				<div class="panel-body">
 					<!-- Hiển thị thông báo thành công hoặc thất bại, class message để cho thông báo ẩn hiện -->
 					@include('admin.alert')
 					@include('admin.error')
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('admin.brand.postUpdate') }}"  enctype = "multipart/form-data" id = "updateForm">
+					<form class="form-horizontal" role="form" method="POST" action="{{ route('admin.product.postUpdate') }}"  enctype = "multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="id" value = "{!!$brand->id!!}">
+						<input type="hidden" name="id" value="{{ $product->id }}" />
+						<input type="hidden" name="type" value="{{ $product->type }}" />
 						<div class="form-group">
-							<label class="col-md-4 control-label">Tên Hãng</label>
+							<label class="col-md-4 control-label">Hãng Sản Xuất</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ $brand->name}}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Logo</label>
-							<div class="col-md-6">
-								<img width=150px src="{{ url('resources/upload/brand/'.$brand->logo) }}" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Logo Mới</label>
-							<div class="col-md-6">
-								<input type="file" name="logo"  style="margin-top: 5px; border: 1px solid #CCCCCC; width: 100%; border-radius: 5px;" value = "{{old('logo')}}"> 
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Quốc Gia</label>
-							<div class="col-md-6">
-								<select name="country" id="cmbCountry" style = "padding: 5px 0px 5px 5px; width:150px">
-									<option value="{{ $brand->country }}" selected>{{ $brand->country }}</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option>
-									<option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option>
-									<option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option>
-									<option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option>
-									<option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option>
-									<option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option>
-									<option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option>
-									<option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option>
-									<option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option>
-									<option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
-									<option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option>
-									<option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="British Virgin Islands">British Virgin Islands</option>
-									<option value="Brunei Darussalam">Brunei Darussalam</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option>
-									<option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option>
-									<option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option>
-									<option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option>
-									<option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option>
-									<option value="Congo">Congo</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option>
-									<option value="Cote D'ivoire">Cote D'ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option>
-									<option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option>
-									<option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="East Timor">East Timor</option>
-									<option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option>
-									<option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option>
-									<option value="Ethiopia">Ethiopia</option><option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
-									<option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option>
-									<option value="France, Metropolitan">France, Metropolitan</option><option value="French Guiana">French Guiana</option>
-									<option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option>
-									<option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option>
-									<option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option>
-									<option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option>
-									<option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option>
-									<option value="Heard and McDonald Islands">Heard and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option>
-									<option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option>
-									<option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Islamic Republic of Iran">Islamic Republic of Iran</option>
-									<option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option>
-									<option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option>
-									<option value="Korea">Korea</option><option value="Korea, Republic of">Korea, Republic of</option><option value="Kuwait">Kuwait</option>
-									<option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option>
-									<option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
-									<option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option>
-									<option value="Macau">Macau</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option>
-									<option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option>
-									<option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option>
-									<option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option>
-									<option value="Moldova, Republic of">Moldova, Republic of</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option>
-									<option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option>
-									<option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option>
-									<option value="Netherlands">Netherlands</option><option value="Netherlands Antilles">Netherlands Antilles</option><option value="New Caledonia">New Caledonia</option>
-									<option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option>
-									<option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option>
-									<option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option>
-									<option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option>
-									<option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn">Pitcairn</option><option value="Poland">Poland</option>
-									<option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Reunion">Reunion</option>
-									<option value="Romania">Romania</option><option value="Russian Federation">Russian Federation</option><option value="Rwanda">Rwanda</option>
-									<option value="Saint Lucia">Saint Lucia</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option>
-									<option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option>
-									<option value="Serbia and Montenegro">Serbia and Montenegro</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option>
-									<option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option>
-									<option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option>
-									<option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="St. Helena">St. Helena</option>
-									<option value="St. Kitts and Nevis">St. Kitts and Nevis</option><option value="St. Pierre and Miquelon">St. Pierre and Miquelon</option>
-									<option value="St. Vincent and the Grenadines">St. Vincent and the Grenadines</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option>
-									<option value="Svalbard and Jan Mayen Islands">Svalbard and Jan Mayen Islands</option><option value="Swaziland">Swaziland</option>
-									<option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syrian Arab Republic">Syrian Arab Republic</option>
-									<option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
-									<option value="Thailand">Thailand</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option>
-									<option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option>
-									<option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option>
-									<option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option>
-									<option value="United Kingdom (Great Britain)">United Kingdom (Great Britain)</option><option value="United States">United States</option>
-									<option value="United States Virgin Islands">United States Virgin Islands</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option>
-									<option value="Vanuatu">Vanuatu</option><option value="Vatican City State">Vatican City State</option><option value="Venezuela">Venezuela</option>
-									<option value="Vietnam">Vietnam</option><option value="Wallis And Futuna Islands">Wallis And Futuna Islands</option><option value="Western Sahara">Western Sahara</option>
-									<option value="Yemen">Yemen</option><option value="Zaire">Zaire</option><option value="Zambia">Zambia</option>
+								<select name='id_brand'>
+									@foreach($brands as $brand)
+										<option value="{{ $brand->id }}" {!! $product->id_brand==$brand->id?'selected':'' !!}>{{ $brand->name }}</option>
+									@endforeach
 								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Tên Sản Phẩm</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" rows="3" name="name" placeholder="" value="{!! $product->name !!}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Số Lượng</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" rows="3" name="amount" placeholder="" value="{!! $product->amount !!}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Giá</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" rows="3" name="price" placeholder="" value="{!! $product->price !!}" />
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-md-4 control-label">Mô Tả</label>
+							<label class="col-md-4 control-label">Giá Mới</label>
 							<div class="col-md-6">
-								<textarea class="form-control" rows="3" name="description" >{!! old('description',!empty($brand->description)?$brand['description']:null) !!}</textarea>
+								<input type="text" class="form-control" rows="3" name="price_new" placeholder="Nhập Giá Mới Sản Phẩm" value="{!! old('price_new',$product->price_new!=0?$product->price_new:'') !!}" />
 							</div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-md-7 col-md-offset-4">
+							<label class="col-md-4 control-label">Ảnh</label>
+							<div class="col-md-6">
+								<img src="{!! url('resources/upload/product/'.$product->id.'/'.$product->image) !!}" height="150"  />
+							</div>
+						</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Ảnh Mới</label>
+								<div class="col-md-6">
+									<input type="file" name="image" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Ảnh Chi Tiết</label>
+								<div id="image_detail" class = "col md-6">
+									@foreach($imagedetails as $image)
+										<img src="{!! url('resources/upload/product/'.$image->id_product.'/detail/'.$image->name) !!}" width="150px" height="100px" />
+										<a href="" id="del_img_demo" class="btn btn-danger btn-circle icon_del"><i class="fa fa-times" ></i></a>
+									@endforeach
+								</div>
+								<div class="col-md-6">
+								<button name="btn_add" type="button" class="btn btn-primary" id="add_img">Thêm ảnh</button>
+								<script type="text/javascript">
+									$(document).ready(function(){
+										$('#add_img').click(function(){
+											$('#image_detail').append('<input type="file" name ="image_details[]">');
+										});
+									});
+								</script>
+								</div>
+							</div>
+						@if($product->type == "mobile")
+							<div class="form-group">
+								<label class="col-md-4 control-label">Công Nghệ Màn Hình</label>
+								<div class="col-md-6">
+									<select name="screen_tech" class="form-control">
+										<option value="LCD" {{ $product->screen_tech=='LCD'?'selected':'' }}>LCD</option>
+										<option value="TFT-LCD" {{ $product->screen_tech=='TFT-LCD'?'selected':'' }}>TFT - LCD</option>
+										<option value="Super LCD" {{ $product->screen_tech=='Super LCD'?'selected':'' }}>Super LCD</option>
+										<option value="IPS LCD" {{ $product->screen_tech=='IPS LCD'?'selected':'' }}>IPS LCD</option>
+										<option value="LED-backlit IPS" {{ $product->screen_tech=='LED-backlit IPS'?'selected':'' }}>LED-backlit IPS</option>
+										<option value="IPS Quantum" {{ $product->screen_tech=='IPS Quantum'?'selected':'' }}>IPS Quantum</option>
+										<option value="OLED" {{ $product->screen_tech=='OLED'?'selected':'' }}>OLED</option>
+										<option value="AMOLED" {{ $product->screen_tech=='AMOLED'?'selected':'' }}>AMOLED</option>
+										<option value="Super AMOLED" {{ $product->screen_tech=='Super AMOLED'?'selected':'' }}>Super AMOLED</option>
+										<option value="Super AMOLED Plus" {{ $product->screen_tech=='Super AMOLED Plus'?'selected':'' }}>Super AMOLED Plus</option>
+										<option value="Super AMOLED HD" {{ $product->screen_tech=='Super AMOLED HD'?'selected':'' }}>Super AMOLED HD</option>
+										<option value="Retina" {{ $product->screen_tech=='Retina'?'selected':'' }}>Retina</option>
+										<option value="Retina HD" {{ $product->screen_tech=='Retina HD'?'selected':'' }}>Retina HD</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Độ Phân Giải</label>
+								<div class="col-md-8">
+									<div class="col-md-6">
+										<input type="text" name="resolution1" placeholder="Kích Thước 1" size="8" value="{{ old('resolution1',!empty($product->resolution1)?$product->resolution1:"") }}" /> px
+									</div>
+									<div class="col-md-6">
+										<input type="text" name="resolution2" placeholder="Kích Thước 2" size="8" value="{{ old('resolution1',!empty($product->resolution2)?$product->resolution2:"") }}" /> px
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Màn Hình Rộng</label>
+								<div class="col-md-6">
+									<input type="text" name="screen_width" size="4" placeholder="Nhập Độ Rộng Của Màn Hình" value="{{ old('screen_width',!empty($product->screen_width)?$product->screen_width:"") }}" /> inch
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Cảm Ứng</label>
+								<div class="col-md-6">
+									<select name="touch">
+										<option value="không">không</option>
+										<option value="cảm ứng điện dung đa điểm">cảm ứng điện dung đa điểm</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Camera Sau</label>
+								<div class="col-md-6">
+									<select name="back_cam">
+										<option value="0.2" {{ $product->back_cam=='0.2'?'selected':'' }}>0.2</option>
+										<option value="1" {{ $product->back_cam=='1'?'selected':'' }}>1</option>
+										<option value="1.2" {{ $product->back_cam=='1.2'?'selected':'' }}>1.2</option>
+										<option value="2" {{ $product->back_cam=='2'?'selected':'' }}>2</option>
+										<option value="2.5" {{ $product->back_cam=='2.5'?'selected':'' }}>2.5</option>
+										<option value="3" {{ $product->back_cam=='3'?'selected':'' }}>3</option>
+										<option value="3.2" {{ $product->back_cam=='3.2'?'selected':'' }}>3.2</option>
+										<option value="5" {{ $product->back_cam=='5'?'selected':'' }}>5</option>
+										<option value="8" {{ $product->back_cam=='8'?'selected':'' }}>8</option>
+										<option value="12" {{ $product->back_cam=='12'?'selected':'' }}>12</option>
+										<option value="13" {{ $product->back_cam=='13'?'selected':'' }}>13</option>
+										<option value="16" {{ $product->back_cam=='16'?'selected':'' }}>16</option>
+										<option value="20" {{ $product->back_cam=='20'?'selected':'' }}>20</option>
+										<option value="23" {{ $product->back_cam=='23'?'selected':'' }}>23</option>
+									</select>
+									<select name="back_cam_type">
+										<option value="MP" {{ $product->back_cam_type=='MP'?'selected':'' }}>MP</option>
+										<option value="Ultra Pixel" {{ $product->back_cam_type=='Ultra Pixel'?'selected':'' }}>Ultra Pixel</option>
+										MP</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Đèn Flash</label>
+								<div class="col-md-6">
+									<select name="flash">
+										<option value="có" {{ $product->flash=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->flash=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Camera Trước</label>
+								<div class="col-md-6">
+									<select name="front_cam">
+										<option value="0.2" {{ $product->front_cam=='0.2'?'selected':'' }}>0.2</option>
+										<option value="1" {{ $product->front_cam=='1'?'selected':'' }}>1</option>
+										<option value="1.2" {{ $product->front_cam=='1.2'?'selected':'' }}>1.2</option>
+										<option value="2" {{ $product->front_cam=='2'?'selected':'' }}>2</option>
+										<option value="2.5" {{ $product->front_cam=='2.5'?'selected':'' }}>2.5</option>
+										<option value="3" {{ $product->front_cam=='3'?'selected':'' }}>3</option>
+										<option value="3.2" {{ $product->front_cam=='3.2'?'selected':'' }}>3.2</option>
+										<option value="5" {{ $product->front_cam=='5'?'selected':'' }}>5</option>
+										<option value="8" {{ $product->front_cam=='8'?'selected':'' }}>8</option>
+										<option value="12" {{ $product->front_cam=='12'?'selected':'' }}>12</option>
+									</select>
+									<select name="front_cam_type">
+										<option value="MP" {{ $product->front_cam_type=='MP'?'selected':'' }}>MP</option>
+										<option value="Ultra Pixel" {{ $product->front_cam_type=='Ultra Pixel'?'selected':'' }}>Ultra Pixel</option>
+										MP</select>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Quay Phim</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="film_shoot" placeholder="Nhập Quay Phim"  value="{{ old('film_shoot',!empty($product->film_shoot)?$product->film_shoot:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Gọi Video</label>
+								<div class="col-md-6">
+									<select name="video_call">
+										<option value="có" {{ $product->video_call=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->video_call=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Hệ Điều Hành</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="operating_system" placeholder="Nhập Hệ Điều Hành" value="{{ old('operating_system',!empty($product->operating_system)?$product->operating_system:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Số Lõi</label>
+								<div class="col-md-6">
+									<select name="core_amount">
+										<option value="1" {{ $product->core_amount=='1'?'selected':'' }}>1</option>
+										<option value="2" {{ $product->core_amount=='2'?'selected':'' }}>2</option>
+										<option value="3" {{ $product->core_amount=='3'?'selected':'' }}>3</option>
+										<option value="4" {{ $product->core_amount=='4'?'selected':'' }}>4</option>
+										<option value="5" {{ $product->core_amount=='5'?'selected':'' }}>5</option>
+										<option value="6" {{ $product->core_amount=='6'?'selected':'' }}>6</option>
+										<option value="7" {{ $product->core_amount=='7'?'selected':'' }}>7</option>
+										<option value="8" {{ $product->core_amount=='8'?'selected':'' }}>8</option>
+									</select> Nhân
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Vi Xử Lý</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="proccesor" placeholder="Nhập Vi Xử Lý"  value="{{ old('proccesor',!empty($product->proccesor)?$product->proccesor:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Tốc Độ CPU</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="CPU_rate" placeholder="Nhập Tốc Độ CPU"  value="{{ old('CPU_rate',!empty($product->CPU_rate)?$product->CPU_rate:"") }}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label">RAM</label>
+								<div class="col-md-6">
+									<select name="ram">
+										<option value='128MB' {{ $product->ram=='128MB'?'selected':'' }}>128MB</option>
+										<option value='256MB' {{ $product->ram=='256MB'?'selected':'' }}>256MB</option>
+										<option value='512MB' {{ $product->ram=='512MB'?'selected':'' }}>512MB</option>
+										<option value='1GB' {{ $product->ram=='1GB'?'selected':'' }}>1GB</option>
+										<option value='1.5GB' {{ $product->ram=='1.5GB'?'selected':'' }}>1.5GB</option>
+										<option value='2GB' {{ $product->ram=='2GB'?'selected':'' }}>2GB</option>
+										<option value='3GB' {{ $product->ram=='3GB'?'selected':'' }}>3GB</option>
+										<option value='4GB' {{ $product->ram=='4GB'?'selected':'' }}>4GB</option>
+										<option value='6GB' {{ $product->ram=='6GB'?'selected':'' }}>6GB</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Bộ Nhớ Trong</label>
+								<div class="col-md-6">
+									<select name="internal_memory">
+										<option value='không' {{ $product->internal_memory=='không'?'selected':'' }}>không</option>
+										<option value='128MB' {{ $product->internal_memory=='128MB'?'selected':'' }}>128MB</option>
+										<option value='256MB' {{ $product->internal_memory=='256MB'?'selected':'' }}>256MB</option>
+										<option value='512MB' {{ $product->internal_memory=='512MB'?'selected':'' }}>512MB</option>
+										<option value='1GB' {{ $product->internal_memory=='1GB'?'selected':'' }}>1GB</option>
+										<option value='2GB' {{ $product->internal_memory=='2GB'?'selected':'' }}>2GB</option>
+										<option value='4GB' {{ $product->internal_memory=='4GB'?'selected':'' }}>4GB</option>
+										<option value='8GB' {{ $product->internal_memory=='6GB'?'selected':'' }}>8GB</option>
+										<option value='16GB' {{ $product->internal_memory=='16GB'?'selected':'' }}>16GB</option>
+										<option value='32GB' {{ $product->internal_memory=='32GB'?'selected':'' }}>32GB</option>
+										<option value='64GB' {{ $product->internal_memory=='64GB'?'selected':'' }}>64GB</option>
+										<option value='80GB' {{ $product->internal_memory=='80GB'?'selected':'' }}>80GB</option>
+										<option value='128GB' {{ $product->internal_memory=='128GB'?'selected':'' }}>128GB</option>
+										<option value='256GB' {{ $product->internal_memory=='256GB'?'selected':'' }}>256GB</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Hỗ Trợ Thẻ Nhớ</label>
+								<div class="col-md-6">
+									<select name="mem_support">
+										<option value="có" {{ $product->mem_support=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->mem_support=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Hỗ Trợ Thẻ Tối Đa</label>
+								<div class="col-md-6">
+									<input type="text" class = "form-control" name="mem_support_max" rows="3" placeholder="Nhập hỗ trợ thẻ tối đa"  value="{{ old('mem_support_max',!empty($product->mem_support_max)?$product->mem_support_max:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Băng Tần 2G</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="sup_2g" placeholder="Nhập Băng Tần 2G"  value="{{ old('sup_2g',!empty($product->sup_2g)?$product->sup_2g:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Băng Tần 3G</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="sup_3g" placeholder="Nhập Băng Tần 3G"  value="{{ old('sup_3g',!empty($product->sup_3g)?$product->sup_3g:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Hỗ Trợ 4G</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="sup_4g" placeholder="Nhập Hỗ Trợ 4G"  value="{{ old('sup_4g',!empty($product->sup_4g)?$product->sup_4g:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Số Khe Sim</label>
+								<div class="col-md-6">
+									<select name="sim_track">
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Loại Sim</label>
+								<div class="col-md-6">
+									<select name="sim_type">
+										<option value="sim thường"  {{ $product->sim_type=='sim thường'?'selected':'' }}>sim thường</option>
+										<option value="micro sim" {{ $product->sim_type=='micro sim'?'selected':'' }}>micro sim</option>
+										<option value="nano sim" {{ $product->sim_type=='nano sim'?'selected':'' }}>nano sim</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Wifi</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="wifi" placeholder="Nhập Công Nghệ Wifi" value="{{ old('wifi',!empty($product->wifi)?$product->wifi:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Dung Lượng Pin</label>
+								<div class="col-md-6">
+									<input type="text" name="battery_capacity" placeholder="Nhập Dung Lượng Pin" size="18"  value="{{ old('battery_capacity',!empty($product->battery_capacity)?$product->battery_capacity:"") }}" /> mAh
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Loại Pin</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="battery_type" placeholder="Nhập Loại Pin"  value="{{ old('battery_type',!empty($product->battery_type)?$product->battery_type:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Kích Thước</label>
+								<div class="col-md-6">
+									<input type="text" rows="3" name="dimension1" placeholder="" size="5"  value="{{ old('dimension1',!empty($product->dimension1)?$product->dimension1:"") }}" />
+									<input type="text" rows="3" name="dimension2" placeholder="" size="5"  value="{{ old('dimension2',!empty($product->dimension2)?$product->dimension2:"") }}" />
+									<input type="text" rows="3" name="dimension3" placeholder="" size="5"  value="{{ old('dimension3',!empty($product->dimension3)?$product->dimension3:"") }}" /> mm
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Trọng Lượng</label>
+								<div class="col-md-6">
+									<input type="text" rows="3" name="weight" placeholder="Nhập Trọng Lượng Sản Phẩm" size="18" value="{{ old('weight',!empty($product->weight)?$product->weight:"") }}" /> gam
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Bluetooth</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="bluetooth" placeholder="Nhập Công Nghệ Bluetooth" value="{{ old('bluetooth',!empty($product->bluetooth)?$product->bluetooth:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">NFC</label>
+								<div class="col-md-6">
+									<select name="nfc">
+										<option value="có" {{ $product->nfc=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->nfc=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Ghi Âm</label>
+								<div class="col-md-6">
+									<select name="record">
+										<option value="có" {{ $product->record=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->record=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Radio</label>
+								<div class="col-md-6">
+									<select name="radio">
+										<option value="có" {{ $product->radio=='có'?'selected':'' }}>có</option>
+										<option value="không" {{ $product->radio=='không'?'selected':'' }}>không</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Thiết Kế</label>
+								<div class="col-md-6">
+									<select name="design">
+										<option value="pin rời" {{ $product->design=='pin rời'?'selected':'' }}>pin rời</option>
+										<option value="nguyên khối" {{ $product->design=='nguyên khối'?'selected':'' }}>nguyên khối</option>
+										<option value="mô-đun" {{ $product->design=='mô-đun'?'selected':'' }}>mô-đun</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Màu</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="color" placeholder="Nhập Màu Sản Phẩm" value="{{ old('color',!empty($product->color)?$product->color:"") }}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Chất Liệu</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" rows="3" name="material" placeholder="Nhập Chất Liệu" value="{{ old('material',!empty($product->material)?$product->material:"") }}" />
+								</div>
+							</div>
+						@endif
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									Cập nhật
+									Cập Nhật
 								</button>
-								<input type="reset" value = "Nhập lại" class="btn btn-primary" id="reset_form">
-								<button type="button" class="btn btn-primary" onclick = "window.location = '../list'">
-									Quay lại
+								@if(!isset($_GET['detail']))
+									<button type = "button" class = "btn btn-primary" onclick = "window.location='/Web_Technology/admin/product/list/{!!$product->type!!}'">
+								@else
+									<button type = "button" class = "btn btn-primary" onclick = "window.location='/Web_Technology/admin/product/detail/{!!$product->type!!}/{!!$product->keywords!!}'">
+								@endif
+									Quay Lại
 								</button>
 							</div>
 						</div>
@@ -142,5 +467,4 @@
 		</div>
 	</div>
 </div>
-	
 @stop

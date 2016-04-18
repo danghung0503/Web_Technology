@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2016 at 01:46 PM
+-- Generation Time: Apr 13, 2016 at 09:26 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -181,6 +181,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL,
   `id_brand` int(10) unsigned NOT NULL,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `amount` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `amountsold` varchar(255) COLLATE utf8_unicode_ci NOT NULL,

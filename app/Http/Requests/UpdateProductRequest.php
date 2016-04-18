@@ -22,7 +22,27 @@ class UpdateProductRequest extends Request {
 	public function rules()
 	{
 		return [
-			//
+			'name'=>'required',
+			'amount'=> 'required|numeric|max:2000000000',
+			'price'=> 'required|numeric|max:2000000000',
+			'price_new'=> 'numeric|max:2000000000',
+			'image'=> 'image|max:5000'
+		];
+	}
+
+	public function messages(){
+		return[
+			'name.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
+			'amount.required'=>'Bạn Chưa Nhập Số Lượng Sản Phẩm',
+			'amount.numeric'=>'Số Lượng Sản Phẩm Vừa Được Nhập Vào Của Bạn Không Ở Dạng Số',
+			'amount.max'=>'Số Lượng Vượt Quá Giới Hạn Cho Phép',
+			'price.required'=>'Bạn Chưa Nhập Giá Cho Sản Phẩm',
+			'price.numeric'=>'Giá Của Sản Phẩm Được Nhập Không Ở Dạng Số',
+			'price.max'=>'Giá Của Sản Phẩm Vượt Quá Giới Hạn Cho Phép',
+			'price_new.numeric'=>'Giá Mới Của Sản Phẩm Được Nhập Không Ở Dạng Số',
+			'price_new.max'=>'Giá Mới Của Sản Phẩm Vượt Quá Giới Hạn Cho Phép',
+			'image.image'=>'File Mà Bạn Chọn Không Phải Là Ảnh',
+			'image.max'=>'Dung lượng file vượt quá giới hạn cho phép'
 		];
 	}
 

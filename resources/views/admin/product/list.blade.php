@@ -5,19 +5,27 @@
 @endsection
 
 @section('content')
-	<form action = "{!!route('admin.brand.postDelete')!!}" method = "POST" id = "listForm">
+	<form action = "{!!route('admin.product.postDelete')!!}" method = "POST" id = "listForm">
 		<input type="hidden" name = "_token" value = "{!!csrf_token()!!}">
 		<table>
 			<thead>
 				<tr>
-					<th>Danh sách các hãng sản xuất</td>
+					@if($type=='mobile')
+						<th>Danh sách điện thoại</td>
+					@elseif($type=='laptop')
+						<th>Danh sách laptop</td>
+					@elseif($type=='tablet')
+						<th>Danh sách máy tính bảng</td>
+					@elseif($type=='accessory')
+						<th>Danh sách phụ kiện</td>
+					@endif
 				</tr>
 			</thead>
 		</table>
 		{{-- Hiện thông báo thành công hoặc thất bại --}}
 		@include('admin.alert')
 		{{-- Hiện phân trang --}}
-		{!!$brands->render()!!}
+		{!!$products->render()!!}
 		<table>
 			<thead>
 				<tr>
@@ -27,33 +35,45 @@
 					<th>STT</th>
 					<th></th>
 					<th></th>
-					<th>Tên hãng</th>
-					<th>Logo</th>
-					<th>Quốc gia</th>
-					<th>Mô tả</th>
+					@if($type=='mobile')
+					<th>Tên Điện Thoại</th>
+					@endif
+					<th>Mô Tả</th>
+					<th>Số Lượng</th>
+					<th>Giá</th>
+					<th>Ảnh</th>
 					<th>Ngày tạo lập</th>
 					<th>Lần chỉnh sửa trước</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php $id = 0?>
-				@foreach($brands as $brand)
+				@foreach($products as $product)
 					<?php $id++ ?>
 					<tr>
 						<td class = "center_align">
-							<input type="checkbox" name = "check[]" value = "{!!$brand->id!!}">
+							<input type="checkbox" name = "check[]" value = "{!!$product->id!!}">
 						</td>
 						<td class = "center_align">{!!$id!!}</td>
-						<td class = "center_align"><a href="{!!url('admin/brand/update')!!}/{!!$brand->id!!}">Sửa</a></td>
-						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá hãng sản xuất {!!$brand->name!!} không?\n Xóa hãng sẽ làm mất tất cả các sản phẩm của hãng, hãy cân nhắc!')" href="{!!url('admin/brand/delete')!!}/{!!$brand->id!!}">Xóa</a></td>
-						<td>{!!$brand->name!!}</td>
-						<td class = "center_align"><img src="{!!url('resources/upload/brand')!!}/{!!$brand->logo!!}" alt="" height="45px" width="45px"></td>
-						<td>{!!$brand->country!!}</td>
-						<td>{!!strlen($brand->description)>35?substr($brand->description,0,30).'...':$brand->description!!}</td>
-						<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($brand->created_at))
+						<td class = "center_align"><a href="{!!url('admin/product/update')!!}/{!!$product->id!!}">Sửa</a></td>
+						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá hãng sản xuất {!!$product->name!!} không?\n Xóa hãng sẽ làm mất tất cả các sản phẩm của hãng, hãy cân nhắc!')" href="{!!url('admin/product/delete')!!}/{!!$product->id!!}">Xóa</a></td>
+						<td>{!!$product->name!!}</td>
+						<td>
+							@if($type=='mobile')
+								{!!'Màn hình:'.(!empty($product->screen_tech)?$product->screen_tech:'chưa cập nhật').', '.(!empty($product->screen_width)?$product->screen_width.' inches':'chưa cập nhật')!!}<br/> 
+								{!!'Hệ Điều Hành: '.(!empty($product->operating_system)?$product->operating_system:'chưa cập nhật').'<br />CPU: '.(!empty($product->CPU_rate)?$product->CPU_rate:'chưa cập nhật').'<br />'!!}
+								{!!'Camera: '.($product->back_cam!=0?$product->back_cam.$product->back_cam_type:'chưa cập nhật').', '.$product->sim_track.' SIM<br />'!!} 
+								{!!'Dung Lượng Pin: '.($product->battery_capacity!=0?$product->battery_capacity.'mAh':'chưa cập nhật')!!}
+								<a href="{!! url('admin/product/detail/mobile/')!!}/{!! $product->keywords !!}">chi tiết</a>
+							@endif
+						</td>
+						<td>{!!$product->amount!!}</td>
+						<td>{!! number_format($product->price,0,',','.') !!}đ</td>
+						<td class = "center_align"><img src="{!!url('resources/upload/product')!!}/{!! $product->id !!}/{!!$product->image!!}" alt="" height="45px" width="45px"></td>
+						<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($product->created_at))
                     ->diffforHumans() 
                 !!}</td>
-                		<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($brand->updated_at))
+                		<td>{!! \Carbon\Carbon::createFromTimeStamp(strtotime($product->updated_at))
                     ->diffforHumans()
                 !!}</td>
 					</tr>
@@ -62,6 +82,6 @@
 		</table>
 		<br>
 		<input type="submit" name = "delete_choose" value = "Xóa chọn" class = "btn btn-success" onclick = "return confirm('Bạn có muốn xóa các hãng sản xuất được chọn?')">
-		<input type="button" name = "add_new" value = "Thêm mới" class = "btn btn-success" onclick = "window.location='./add'">
+		<input type="button" name = "add_new" value = "Thêm mới" class = "btn btn-success" onclick = "window.location='/Web_Technology/admin/product/add/{!!$type!!}'">
 	</form>
 @stop

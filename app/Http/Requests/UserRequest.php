@@ -27,7 +27,7 @@ class UserRequest extends Request {
 			'email'	=>'required|email|max:255|unique:users',
 			'gender'=>'required',
 			'fullname'=>'required|max:255',
-			'phonenumber'=>'required|numeric|min:10',
+			'phonenumber'=>'required|numeric|min:1000000000|max:99999999999',
 			'address'=>'required',
 			'avatar'=>'image|max:5000'
 		];
@@ -48,6 +48,7 @@ class UserRequest extends Request {
 			'phonenumber.required'=>'Vui lòng nhập số điện thoại của bạn',
 			'phonenumber.numeric'=>'Dữ liệu mà bạn nhập vào không ở dạng số',
 			'phonenumber.min'=>'Số điện thoại không hợp lệ',
+			'phonenumber.max'=>'Số điện thoại không hợp lệ',
 			'address.required'=>'Vui lòng nhập địa chỉ của bạn',
 			'avatar.image' =>'File được nhập không phải là ảnh',
 			'avatar.max'=>'Kích thước file quá lớn'

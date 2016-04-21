@@ -66,6 +66,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 		Route::post('delete',['as'=>'admin.product.postDelete','uses'=>'Product\ProductController@postDelete']);
 		Route::get('detail/{type}/{keywords}',['as'=>'admin.product.getDetail','uses'=>'Product\ProductController@getDetail']);
 	});
+
+	Route::group(['prefix'=>'accessorytype'],function(){
+		Route::get('list',['as'=>'admin.accessorytype.getList','uses'=>'Product\AccessoryTypeController@getList']);
+		Route::get('add',['as'=>'admin.accessorytype.getAdd','uses'=>'Product\AccessoryTypeController@getAdd']);
+		Route::post('add',['as'=>'admin.accessorytype.postAdd','uses'=>'Product\AccessoryTypeController@postAdd']);
+		Route::get('update/{id}',['as'=>'admin.accessorytype.getUpdate','uses'=>'Product\AccessoryTypeController@getUpdate']);
+		Route::post('update',['as'=>'admin.accessorytype.postUpdate','uses'=>'Product\AccessoryTypeController@postUpdate']);
+		Route::get('delete/{id}',['as'=>'admin.accessorytype.getUpdate','uses'=>'Product\AccessoryTypeController@getUpdate']);
+		Route::post('delete',['as'=>'admin.accessorytype.postDelete','uses'=>'Product\AccessoryTypeController@postDelete']);
+	});
 	//Quản lý tin tức
 			
 	//Quản lý thống kê
@@ -84,13 +94,13 @@ Route::group(['prefix'=>'users'],function(){
 	//Quản lý giỏ hàng
 		Route::group(['prefix'=>'shoppingcart'],function(){
 			Route::get('add',['as'=>'user.customer.shoppingcart.getAdd','uses'=>'Order\ShoppingCartController@getAdd']);
-			Route::get('list',['as'=>'user.customer.shoppingcart.getList','uses'=>'Ỏder\ShoppingCartController@getList']);
+			Route::get('list',['as'=>'user.customer.shoppingcart.getList','uses'=>'Order\ShoppingCartController@getList']);
 			Route::get('delete/{id}',['as'=>'user.customer.shoppingcart.getDelete','uses'=>'Order\ShoppingCartController@getDelete']);
 		});
 	//Quản lý đơn hàng
 		Route::group(['prefix'=>'order'],function(){
 			Route::get('add',['as'=>'user.customer.order.getAdd','uses'=>'Order\Controller@getAdd']);
-			Route::get('list',['as'=>'user.customer.order.getList','uses'=>'Ỏder\ShoppingCartController@getList']);
+			Route::get('list',['as'=>'user.customer.order.getList','uses'=>'Order\ShoppingCartController@getList']);
 			Route::get('delete/{id}',['as'=>'user.customer.order.getDelete','uses'=>'Order\ShoppingCartController@getDelete']);
 		});
 	//Quản lý thanh toán

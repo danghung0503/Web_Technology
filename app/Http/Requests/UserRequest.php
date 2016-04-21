@@ -27,7 +27,7 @@ class UserRequest extends Request {
 			'email'	=>'required|email|max:255|unique:users',
 			'gender'=>'required',
 			'fullname'=>'required|max:255',
-			'phonenumber'=>'required|numeric|min:1000000000|max:99999999999',
+			'phonenumber'=>'required|numeric|min:100000000|max:99999999999',
 			'address'=>'required',
 			'avatar'=>'image|max:5000'
 		];

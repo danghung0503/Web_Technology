@@ -27,7 +27,7 @@ class UserController extends Controller {
 		$user = User::find(Auth::user()->id);
 		$user->username 		= $request->username;
 		if(!empty($request->password))
-			$user->password 		= Hash::make($request->password);
+			$user->password 	= $request->password;
 		$user->gender 			= $request->gender;
 		$user->fullname 		= $request->fullname;
 		$user->phonenumber 		= $request->phonenumber;
@@ -50,6 +50,9 @@ class UserController extends Controller {
 		Auth::attempt(['username'=>$user->username,'password'=>$user->password]);
 		if(Auth::user()->level==1)
 			return redirect('users/members/index');
-		return redirect('admin');
+		else if(Auth::user()->level == 2){
+			return redirect('admin');
+		}
+		return redirect('/');
 	}
 }

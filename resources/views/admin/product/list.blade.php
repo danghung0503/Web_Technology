@@ -7,6 +7,7 @@
 @section('content')
 	<form action = "{!!route('admin.product.postDelete')!!}" method = "POST" id = "listForm">
 		<input type="hidden" name = "_token" value = "{!!csrf_token()!!}">
+		<input type="hidden" name = "type" value = "{!! $type !!}">
 		<table>
 			<thead>
 				<tr>
@@ -35,9 +36,7 @@
 					<th>STT</th>
 					<th></th>
 					<th></th>
-					@if($type=='mobile')
-					<th>Tên Điện Thoại</th>
-					@endif
+					<th>Tên</th>
 					<th>Mô Tả</th>
 					<th>Số Lượng</th>
 					<th>Giá</th>
@@ -56,7 +55,7 @@
 						</td>
 						<td class = "center_align">{!!$id!!}</td>
 						<td class = "center_align"><a href="{!!url('admin/product/update')!!}/{!!$product->id!!}">Sửa</a></td>
-						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá hãng sản xuất {!!$product->name!!} không?\n Xóa hãng sẽ làm mất tất cả các sản phẩm của hãng, hãy cân nhắc!')" href="{!!url('admin/product/delete')!!}/{!!$product->id!!}">Xóa</a></td>
+						<td class = "center_align"><a onclick = "return confirm('Bạn có muốn xoá các sản phẩm {!!$product->name!!} không?\nhãy cân nhắc!')" href="{!!url('admin/product/delete')!!}/{!!$product->id!!}">Xóa</a></td>
 						<td>{!!$product->name!!}</td>
 						<td>
 							@if($type=='mobile')
@@ -65,6 +64,16 @@
 								{!!'Camera: '.($product->back_cam!=0?$product->back_cam.$product->back_cam_type:'chưa cập nhật').', '.$product->sim_track.' SIM<br />'!!} 
 								{!!'Dung Lượng Pin: '.($product->battery_capacity!=0?$product->battery_capacity.'mAh':'chưa cập nhật')!!}
 								<a href="{!! url('admin/product/detail/mobile/')!!}/{!! $product->keywords !!}">chi tiết</a>
+							@elseif($type=='laptop')
+								{!!'Màn hình:'.(!empty($product->screen_width)?$product->screen_width.'"':'chưa cập nhật')!!}<br/> 
+								{!!'Hệ Điều Hành: '.(!empty($product->operating_system)?$product->operating_system:'chưa cập nhật').'<br />CPU: '.(!empty($product->CPU_rate)?$product->CPU_rate:'chưa cập nhật').'<br />'!!}
+								{!!'Ổ Cứng: '.(!empty($product->hard_disk)?$product->hardisk:'chưa cập nhật')!!} 
+								{!!'Dung Lượng Pin: '.($product->battery_capacity!=0?$product->battery_capacity.'mAh':'chưa cập nhật')!!}
+								<a href="{!! url('admin/product/detail/laptop/')!!}/{!! $product->keywords !!}">chi tiết</a>
+							@elseif($type=='tablet')
+								{!!'Màn hình:'.(!empty($product->screen_width)?$product->screen_width.'"':'chưa cập nhật')!!}<br/>
+								{!!'Hệ Điều Hành: '.(!empty($product->operating_system)?$product->operating_system:'chưa cập nhật').'<br />CPU: '.(!empty($product->CPU_rate)?$product->CPU_rate:'chưa cập nhật').'<br />'!!}
+								<a href="{!! url('admin/product/detail/tablet/')!!}/{!! $product->keywords !!}">chi tiết</a>
 							@endif
 						</td>
 						<td>{!!$product->amount!!}</td>
@@ -81,7 +90,7 @@
 			</tbody>
 		</table>
 		<br>
-		<input type="submit" name = "delete_choose" value = "Xóa chọn" class = "btn btn-success" onclick = "return confirm('Bạn có muốn xóa các hãng sản xuất được chọn?')">
+		<input type="submit" name = "delete_choose" value = "Xóa chọn" class = "btn btn-success" onclick = "return confirm('Bạn có chắc muốn xóa các sản phẩm được chọn không?')">
 		<input type="button" name = "add_new" value = "Thêm mới" class = "btn btn-success" onclick = "window.location='/Web_Technology/admin/product/add/{!!$type!!}'">
 	</form>
 @stop

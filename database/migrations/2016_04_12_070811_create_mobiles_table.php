@@ -14,8 +14,8 @@ class CreateMobilesTable extends Migration {
 	{
 		Schema::create('mobiles', function(Blueprint $table)
 		{
-			$table->integer('id_product');
-			$table->primary('id_product');
+			$table->integer('id');
+			$table->primary('id');
 			$table->string('screen_tech');
 			$table->integer('resolution1');
 			$table->integer('resolution2');

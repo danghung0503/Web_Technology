@@ -116,13 +116,13 @@ class AuthController extends Controller {
 					  //1. Tên của view sẽ chứa thômh điệp email
 					  //2. Mảng dữl iệu muốn truy nhập đến view
 					  //3. Cái nhận một sự thực hiện thông điệp
-		Mail::send('emails.welcome',$data, function($message) use ($data){
-			//Địa chỉ gửi
-			$message->from('danghung3136@gmail.com','dienthoai123456.org');
-			$message->subject('Chào mừng bạn đến với Website của chúng tôi!');
-			//Địa chỉ nhận
-			$message->to($data['email']);
-		});
+		// Mail::send('emails.welcome',$data, function($message) use ($data){
+		// 	//Địa chỉ gửi
+		// 	$message->from('danghung3136@gmail.com','dienthoai123456.org');
+		// 	$message->subject('Chào mừng bạn đến với Website của chúng tôi!');
+		// 	//Địa chỉ nhận
+		// 	$message->to($data['email']);
+		// });
 
 		$user->save();
 		$id = $user->id;

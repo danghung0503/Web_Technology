@@ -4,7 +4,7 @@
 			<img src="{!!url('resources/upload/avatar')!!}/{!!Auth::user()->avatar!!}" alt="Avatar" class="avatar">
 		</div>
 		<ul>
-			<li><a href="{!!url('member/update')!!}/{!!Auth::user()->id!!}">Cập nhật</a></li>
+			<li><a href="{!!url('users/members/update')!!}">Cập nhật</a></li>
 			<li><a href="{!!url('/auth/logout')!!}">Đăng xuất</a></li>
 		</ul>
 	</div>

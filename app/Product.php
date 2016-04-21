@@ -13,6 +13,12 @@ class Product extends Model {
 	public function mobile(){
 		return $this->hasOne('App\Mobile','id');
 	}
+	public function laptop(){
+		return $this->hasOne('App\Laptop','id');
+	}
+	public function tablet(){
+		return $this->hasOne('App\Tablet','id');
+	}
 	public function brand(){
 		return $this->belongsTo('App\Brand');
 	}

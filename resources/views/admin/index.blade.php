@@ -22,6 +22,11 @@
 	<script type = "text/javascript" src = "{!!url('public/js/admin.js')!!}"></script>
 	<!-- Script cho việc flash message -->
 	<script type = "text/javascript" src = "{!!url('public/js/my_script.js')!!}"></script>
+	<script src="{{ url('public/admin/js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url('public/admin/js/ckfinder/ckfinder.js') }}"></script>
+    <script type = "text/JavaScript">
+        var baseURL = "{!! url('/') !!}";
+    </script>
 </head>
 <body>
 <div id="header">
@@ -29,11 +34,11 @@
 			<a href="#"><img src="{!!url('public/images/logo.png')!!}" alt="TheGioiCongNghe.Com" title = "TheGioiCongNghe.com"></a>
 		</div>
 		<div class="info_manage">
-			<a><span>{!!(Auth::user()->role=='admin')?'Admin':'Manager'!!} </span>
+			<a><span>{!!(Auth::user()->level==2)?'Admin':'Manager'!!} </span>
 				<i class="fa fa-chevron-down"></i>
 			</a>
 			<ul>
-				<li><a href="{!!url('admin/member/update')!!}/{!!Auth::user()->id!!}"><i class="fa fa-gears"></i> Cập nhật</a></li>
+				<li><a href="{!!url('users/members/update')!!}"><i class="fa fa-gears"></i> Cập nhật</a></li>
 				<li><a href="{!!url('/auth/logout')!!}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 			</ul>
 		</div>
